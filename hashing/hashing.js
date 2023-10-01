@@ -67,7 +67,9 @@ frequencyOfChar("a", "alibaba");
  */
 
 // Brute force approach
+// TC - Object(n^2)
 
+// use Hashing
 const frequencyCounterInArray1 = (arr) => {
   let obj = {};
   for (let i = 0; i < arr.length; i++) {
