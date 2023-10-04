@@ -61,6 +61,7 @@ frequencyOfChar("a", "alibaba");
  */
 
 /**
+ * Problem 1
  * Count frequency of each element in the array
  * Problem statement: Given an array, we have to found the number of occurrences of each element
  * in the array.
@@ -77,4 +78,41 @@ const frequencyCounterInArray1 = (arr) => {
   }
   return obj;
 };
-console.log(frequencyCounterInArray1([1,2,3,4,1,2,3]));  // O(n)
+console.log(frequencyCounterInArray1([1,2,3,4,1,2,3]));  // TC =  O(n)
+
+
+/**
+ * Space complexity
+ * The SC will be defined by the number of unique characters
+ * in the worst case, the number of unique chars = no. of chars of the string
+ * but even if no. of chars in string = 10^5/10^7, the no. of entries in the map will be 52(26 + 26)
+ * so by increasing length of string, the space is not increasing.
+ * space is constant w.r.t input size
+ * SC = O(1)
+ * See: https://github.com/singhsanket143/FrontendDSA/blob/master/July1/Advanced_Problems_on_Arrays_and_Objects.pdf
+ */
+
+
+/**
+ * Problem 2
+ * Given a string of character, find the first non - repeating chars in the string
+ */
+
+const firstNonRepeatingChar = (str) => {
+  let obj = {};
+
+  //Frequency mapping
+  for (let i = 0; i < str.length; i++) {
+    obj[str[i]] ? obj[str[i]]++ : obj[str[i]] = 1;
+  }
+  
+  // loop through map to find first non-repeating char
+  for (let i = 0; i < str.length; i++) {
+    if(obj[str[i]] === 1) {
+      return str[i];
+    }
+  }
+
+  return -1;
+};
+console.log(firstNonRepeatingChar('krishna'))
