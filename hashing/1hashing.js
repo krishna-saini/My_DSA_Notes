@@ -115,4 +115,6 @@ const firstNonRepeatingChar = (str) => {
 
   return -1;
 };
-console.log(firstNonRepeatingChar('krishna'))
+console.log(firstNonRepeatingChar('krishna')) // TC = O(n)
+// SC = O(1) as the no. of entries in the map will be 52(26 + 26) which is constant
+// if these were numbers, then the SC will be O(n) as the no. of entries in the map will be equal to the no. of unique numbers in the array
