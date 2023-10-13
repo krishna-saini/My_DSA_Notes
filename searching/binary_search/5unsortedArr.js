@@ -37,8 +37,10 @@ function findIndexOfFirstInfinityFromUnsortedArrOfUndefinedLength(arr) {
         start = end;
         end = end * 2;
     }
-    return findFirstInfiniteNumber(arr.slice(start, end + 1)); // O(logn)
+    return start + findFirstInfiniteNumber(arr.slice(start, end + 1)); // O(logn)
 }
+
+console.log(findIndexOfFirstInfinityFromUnsortedArrOfUndefinedLength([1, 2, 3, 4, 5, 6, 7, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity])); // 7
 
 //TC: O(logn) + O(logn) = O(logn)
 // SC: O(1)
