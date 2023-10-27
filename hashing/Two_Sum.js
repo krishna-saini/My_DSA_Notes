@@ -24,15 +24,15 @@ var twoSum = function(nums, target) { // using hashing
     const numToIndex = {}; // Create a Map to store numbers and their indices
 
     for (let i = 0; i < nums.length; i++) {
-        const complement = target - nums[i];
-console.log(numToIndex, numToIndex[complement])
+        const complement = target - nums[i]; // Calculate the complement
+
         // Check if the complement exists in the Map
-        if (numToIndex[complement] !== undefined) {
-            return [numToIndex[complement], i];
+        if (numToIndex.hasOwnProperty(complement)) {
+            return [numToIndex[complement], i]; // Return the solution
         }
 
         // Store the current number and its index in the Map
-        numToIndex[nums[i]] = i;
+        numToIndex[nums[i]] = i; //
     }
 
     throw new Error("No solution found");

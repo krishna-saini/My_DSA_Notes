@@ -74,7 +74,7 @@ frequencyOfChar("a", "alibaba");
 const frequencyCounterInArray1 = (arr) => {
   let obj = {};
   for (let i = 0; i < arr.length; i++) {
-    obj[arr[i]] ? obj[arr[i]]++ : obj[arr[i]] = 1;
+    obj.hasOwnProperty(arr[i]) ? obj[arr[i]]++ : obj[arr[i]] = 1;
   }
   return obj;
 };
@@ -103,7 +103,7 @@ const firstNonRepeatingChar = (str) => {
 
   //Frequency mapping
   for (let i = 0; i < str.length; i++) {
-    obj[str[i]] ? obj[str[i]]++ : obj[str[i]] = 1;
+    obj.hasOwnProperty(str[i]) ? obj[str[i]]++ : obj[str[i]] = 1;
   }
   
   // loop through map to find first non-repeating char
