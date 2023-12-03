@@ -12,3 +12,5 @@ function checkPalindrome(str){
 
 // TC: O(n) - n is the length of the string
 // SC: O(n) - recursive stack space
+
+// solve it using two pointer method
