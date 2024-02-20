@@ -9,6 +9,9 @@ const fibonacci = (n) => {
   if (n < 2) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 };
+console.log(fibonacci(3))
+
+// Time complexity = work done per node * number of nodes = O(1) * 2^n = O(2^n)
 
 // TC: O(2^n) - exponential time complexity
 //  draw the recursion tree and see how many nodes are there
@@ -38,7 +41,6 @@ function fibonacciMemo(n, memo = {}) {
     return memo[n];
   }
 }
-console.log(fibonacciMemo(5));
 
 // TC: O(n)
 // how ? draw the recursion tree and see how many nodes are there

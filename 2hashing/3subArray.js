@@ -10,7 +10,7 @@ function generateSubArray(arr){
     let result = [];
     let n = arr.length
     for(start=0; start<n; start++){ // O(n)
-        for(let end=start+1; end<n; end++){    // O(n)
+        for(let end=start+1; end<=n; end++){    // O(n)
             const subArray = arr.slice(start, end);  // O(n)
             result.push(subArray)
         }
