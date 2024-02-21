@@ -9,8 +9,9 @@
 
 /**
  * Better approach -
- * As we know that for a sorted array the previous of every element is smaller than or equal to its current element
- * traverse the array and check if current element is less that all of the further elements
+ * As we know that for a sorted array the previous of every element is smaller than 
+ * or equal to its current element, traverse the array and check if 
+ * current element is less that all of the further elements
  * if yes then return true
  * else return false
  *
