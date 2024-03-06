@@ -74,4 +74,6 @@ const checkIfSubArrayWithSumZero2 = (array) => {
   return false;
 };
 
-console.log(checkIfSubArrayWithSumZero2([1, 2, 0, 3]));  //O(n)
+console.log(checkIfSubArrayWithSumZero2([1, 2, -3, 3]));  
+// TC O(n)
+// SC - O(n)
