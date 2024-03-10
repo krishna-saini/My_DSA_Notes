@@ -1,9 +1,12 @@
+// find-the-majority-element-that-occurs-more-than-n-2-times/
+
+// https://leetcode.com/problems/majority-element/
+
 // Brute Force
 // O(n^2), O(1)
 
 // using mapping
 // O(n), O(n)
-
 
 // Moore voting algo
 /*
@@ -18,38 +21,37 @@ If they are different decrease the Count by 1.
 The integer present in Element should be the result we are expecting 
 */
 
-
 function majorityElement(arr) {
-    // Size of the given array
-    let n = arr.length;
-    let cnt = 0; // Count
-    let el; // Element
+  // Size of the given array
+  let n = arr.length;
+  let cnt = 0; // Count
+  let el; // Element
 
-    // Applying the algorithm
-    for (let i = 0; i < n; i++) {
-        if (cnt === 0) {
-            cnt = 1;
-            el = arr[i];
-        } else if (el === arr[i]) {
-            cnt++;
-        } else {
-            cnt--;
-        }
+  // Applying the algorithm
+  for (let i = 0; i < n; i++) {
+    if (cnt === 0) {
+      cnt = 1;
+      el = arr[i];
+    } else if (el === arr[i]) {
+      cnt++;
+    } else {
+      cnt--;
     }
+  }
 
-    // Checking if the stored element is the majority element
-    // we dont need this loop if questions says that there will be a majority element
-    let cnt1 = 0;
-    for (let i = 0; i < n; i++) {
-        if (arr[i] === el) {
-            cnt1++;
-        }
+  // Checking if the stored element is the majority element
+  // we dont need this loop if questions says that there will be a majority element
+  let cnt1 = 0;
+  for (let i = 0; i < n; i++) {
+    if (arr[i] === el) {
+      cnt1++;
     }
+  }
 
-    if (cnt1 > Math.floor(n / 2)) {
-        return el;
-    }
-    return -1;
+  if (cnt1 > Math.floor(n / 2)) {
+    return el;
+  }
+  return -1;
 }
 
 let arr = [2, 2, 1, 1, 1, 2, 2];
