@@ -1,3 +1,9 @@
+/**
+ * Longest Subarray with given Sum K(Positives + negetives)
+  Problem Statement: Given an array and a sum k,
+ we need to print the length of the longest subarray that sums to k.
+ */
+
 function getLongestSubarray(arr, k) {
   let left = 0;
   let right = 0;
@@ -28,7 +34,7 @@ function getLongestSubarray(arr, k) {
 let a = [2, 3, 5, 1, 9];
 let k = 10;
 let len = getLongestSubarray(a, k);
-console.log("The length of the longest subarray is:", len);
+console.log("The length of the longest subarray having sum = k  is:", len);
 
 // TC - O(2N)
 //Reason: The outer while loop i.e. the right pointer can move up to index n-1
