@@ -9,31 +9,32 @@ eg -
 
 function lowerBound(nums, target) {
   let left = 0;
-  let right = nums.length;
+  let right = nums.length-1;
 
-  while (left < right) {
+  while (left <= right) {
       let mid = left + Math.floor((right - left) / 2);
-      if (nums[mid] < target) {
-          left = mid + 1;
+      // condtion for lower bound
+      if (nums[mid] >= target) {
+        right = mid-1;
       } else {
-          right = mid;
+        left = mid + 1;
       }
   }
-
   return left;
 }
 
 
 function upperBound(nums, target) {
   let left = 0;
-  let right = nums.length;
+  let right = nums.length-1;
 
-  while (left < right) {
+  while (left <= right) {
       let mid = left + Math.floor((right - left) / 2);
-      if (nums[mid] <= target) {
-          left = mid + 1;
+      // condtion for upper bount
+      if (nums[mid] > target) {
+        right = mid-1;
       } else {
-          right = mid;
+        left = mid + 1;
       }
   }
 
@@ -42,7 +43,7 @@ function upperBound(nums, target) {
 
 const arr = [3, 5, 9, 9, 15, 19];
 
-const ub = upperBound(arr, 9);
+const ub = upperBound(arr, 171);
 console.log('The upper bound is the index:', ub);
-const lb = lowerBound(arr, 9);
+const lb = lowerBound(arr, 19);
 console.log('The lower bound is the index:', lb);
