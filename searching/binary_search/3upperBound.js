@@ -1,23 +1,35 @@
-function upperBound(arr, x) {
-  let low = 0;
-  let high = arr.length - 1;
-  let ans = arr.length;
+/*
+find i for which arr[i]>x
+
+Input Format: N = 4, arr[] = {1,2,2,3}, x = 2
+Result: 3
+*/
+
+// Brute force - linear search with O(n)
+
+function upperBound(arr, x, n) {
+  let low = 0,
+    high = n - 1;
+  let ans = n;
 
   while (low <= high) {
-    let mid = low + Math.floor((high - low) / 2); // this is done to avoid overflowing that may occur if we do mid = high+ low/2
-
-    if (arr[mid] <= x) {
-      // discard the left half
-      low = mid + 1;
-    } else {
-      // element at mid can be a potential answer
+    let mid = low + Math.floor((high-low) / 2);
+    // maybe an answer
+    if (arr[mid] > x) {
       ans = mid;
-
-      end = mid - 1; // go and find something even better on left side
+      //look for smaller index on the left
+      high = mid - 1;
+    } else {
+      low = mid + 1; // look on the right
     }
   }
   return ans;
 }
-console.log(
-  upperBound([1, 3, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 8)
-);
+
+let arr = [3, 5, 8, 9, 15, 19];
+let n = 6,
+  x = 9;
+let ind = upperBound(arr, x, n);
+console.log("The upper bound is the index:", ind);
+
+// O(logn)
