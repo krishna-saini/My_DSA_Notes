@@ -1,4 +1,10 @@
 /**
+ * https://leetcode.com/problems/find-peak-element/description/
+ * 
+ * A peak element is an element that is strictly greater than its neighbors.
+ * Given a 0-indexed integer array nums, find a peak element, and return its index. 
+ * If the array contains multiple peaks, return the index to any of the peaks.
+ * 
  * @param {number[]} nums
  * @return {number}
  */
