@@ -18,43 +18,43 @@ In that case, eliminate them to decrease seach space
 */
 
 var search = function (arr, target) {
-    let left = 0;
-    let right = arr.length - 1;
-    while (left <= right) {
-      const mid = left + Math.floor((right - left) / 2);
-   
-      if (arr[mid] === target) {
-        return true;
-      }
-if(arr[left]===arr[mid] && arr[mid]===arr[right]){
-    left++;
-    right--;
-    continue;
-}
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
 
-      if (arr[left] <= arr[mid]) {
-        // left half is sorted
-        // check if target exist
-        if (arr[left] <= target && target <= arr[mid]) {
-          // discard right half
-          right = mid - 1;
-        } else {
-          // discard left half
-          left = mid + 1;
-        }
+    if (arr[mid] === target) {
+      return true;
+    }
+    if (arr[left] === arr[mid] && arr[mid] === arr[right]) {
+      left++;
+      right--;
+      continue;
+    }
+
+    if (arr[left] <= arr[mid]) {
+      // left half is sorted
+      // check if target exist
+      if (arr[left] <= target && target <= arr[mid]) {
+        // discard right half
+        right = mid - 1;
       } else {
-        // right half is sorted
-        // check if target exist
-        if (arr[mid] <= target && target <= arr[right]) {
-          // discard left half
-          left = mid + 1;
-        } else {
-          // discard right half
-          right = mid - 1;
-        }
+        // discard left half
+        left = mid + 1;
+      }
+    } else {
+      // right half is sorted
+      // check if target exist
+      if (arr[mid] <= target && target <= arr[right]) {
+        // discard left half
+        left = mid + 1;
+      } else {
+        // discard right half
+        right = mid - 1;
       }
     }
-    return false;
-  };
+  }
+  return false;
+};
 
-  console.log(search([1, 3], 1));
+console.log(search([1, 3], 1));

@@ -1,9 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "files.autoSave": "afterDelay",
-  "files.eol": "\n",
-  "prettier.jsxSingleQuote": true,
-  "prettier.requirePragma": true,
-  "prettier.enableDebugLogs": false,
-  "prettier.singleQuote": true
-}
