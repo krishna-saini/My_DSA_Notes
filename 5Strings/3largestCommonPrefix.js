@@ -40,12 +40,14 @@ var longestCommonPrefix2 = function (strs) {
   }, strs[0]);
   let ansIndex;
 
-  for (let i = 0; i < min.length; i++) {
-    if (!strs.every((str) => str.startsWith(min.slice(0, i + 1)))) {
-      ansIndex = i;
-      break;
-    }
+  if (!strs.length) return '';
+  let longerstCommonPrefix = '';
+  for (let i = 0; i < strs[0].length; i++) {
+    let char = strs[0][i];
+    // if(!char) return ''
+    if (strs.every((str) => str[i] === char)) {
+      longerstCommonPrefix += char;
+    } else break;
   }
-  return [min, ansIndex];
-  // return ansIndex ?  min.slice(0, ansIndex) : "";
+  return longerstCommonPrefix;
 };

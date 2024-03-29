@@ -51,7 +51,7 @@ var isAnagram = function (s, t) {
 
 // TC = O(n)
 
-// Space complexity = O(1)
+// Space complexity = O(n)
 
 // how to check if two array are anagram or not
 // input([1,2,3], [3,2,1])
@@ -63,7 +63,7 @@ function checkArrayAnagram(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
   }
-  arr1.sort();
+  arr1.sort(); // nlogn TC
   arr2.sort();
   for (let i = 0; i < arr1.length; i++) {
     if (arr1[i] !== arr2[i]) return false;
@@ -88,5 +88,7 @@ function checkArrayAnagramHashing(arr1, arr2) {
     map[arr2[i]]--;
   }
   return true;
-} // TC = O(n)
+} 
+// TC = O(n)
+//. SC O(n)
 
