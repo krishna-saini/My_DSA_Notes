@@ -63,7 +63,7 @@ else i++
 
 const twoSumUsingTwoPointer = (arr, target) => {
   let start = 0;
-  let end = arr.length - 1;
+  let end = arr.length - 1; 
   let sum = 0;
   while (start < end) {
     sum = arr[start] + arr[end];
