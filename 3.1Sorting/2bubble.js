@@ -22,4 +22,7 @@ const bubbleSort = (arr) => {
   return arr;
 };
 console.log('krishna', bubbleSort([2, 5, 1, 0, 8, 4]));
-// We will check in the first iteration if any swap is taking place. If the array is already sorted no swap will occur and we will break out from the loops
+
+// TC - O(n^2)
+-
+.
