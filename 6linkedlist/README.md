@@ -16,8 +16,27 @@ can be quickly accessed at a specified index
 insertion and deletion is expensive
 indexed in order
 
+insertion - O(n)
+removal - O(n)
+Searching - O(n)
+Access - O(1) -> Array wins
+
 ### LL
 
 have to traverse from start to access any node. Random acces is not allowed.
 insertion & deletion are not expensive. Power of LL.
 not indexed in order
+
+insertion - O(1)
+removal - O(n) / O(1)
+Searching - O(n)
+Access - O(n) as we have to loop
+
+So LL excel at insertion and deletion compare to array. so if you dont need random 
+access, you just want some data represented in a list with an order, LL is the best choice
+
+Example -> Browser forward backward button
+LL are required to build stack and queue
+
+### Doubly LL
+it has two pointers on each node - next and prev
