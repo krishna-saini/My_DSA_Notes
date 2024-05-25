@@ -80,7 +80,7 @@ class singlyLL {
   // list(2) -> {val: 3, next: next}
   get(index) {
     if (index < 0) return undefined;
-    if (index > this.length) return undefined;
+    if (index >= this.length) return undefined;
     if (!this.head) return undefined;
     let counter = 0;
     let currentNode = this.head;
@@ -124,12 +124,12 @@ class singlyLL {
    */
   insert(newValue, index) {
     if (index < 0 || index > this.length) return false;
-    if (index === 0) {
-      return this.unshift(newValue);
-    }
-    if (index === this.length) {
-      return this.push(newValue);
-    }
+      if (index === 0) {
+        return this.unshift(newValue);
+      }
+      if (index === this.length) {
+        return this.push(newValue);
+      }
 
     const newNode = new Node(newValue);
     let preNode = this.get(index - 1);

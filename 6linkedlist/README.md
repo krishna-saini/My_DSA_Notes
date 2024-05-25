@@ -9,6 +9,9 @@ Arrays are like elevator which can take you to any floor, while LL are like stai
 HEAD is the first element of the list. TAIL is the last element of the list.
 
 Try visualGo website for visualization
+1. https://visualgo.net/en/list?mode=LL
+2. https://visualgo.net/en/list?mode=DLL
+3. https://leetcode.com/explore/learn/card/linked-list/ (suggested by google)
 
 ### Arrays
 
@@ -23,20 +26,20 @@ Access - O(1) -> Array wins
 
 ### LL
 
-have to traverse from start to access any node. Random acces is not allowed.
-insertion & deletion are not expensive. Power of LL.
-not indexed in order
+1. have to traverse from start to access any node. Random acces is not allowed.
+2. insertion & deletion are not expensive. Power of LL.
+3. not indexed in order
+4. Storing a value in LL is more expensive as we have to store next/prev too for each node
 
-insertion - O(1)
-removal - O(n) / O(1)
-Searching - O(n)
-Access - O(n) as we have to loop
-
-So LL excel at insertion and deletion compare to array. so if you dont need random 
-access, you just want some data represented in a list with an order, LL is the best choice
+So LL excel at insertion and deletion compare to array. so if you dont need random access, you just want some data represented in a list with an order, LL is the best choice
 
 Example -> Browser forward backward button
 LL are required to build stack and queue
 
 ### Doubly LL
 it has two pointers on each node - next and prev
+
+insertion - O(1)
+removal - O(1)  // it is O(n) for single LL
+Searching - O(n)
+Access - O(n) as we have to loop
