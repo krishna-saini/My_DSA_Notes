@@ -9,6 +9,7 @@ Arrays are like elevator which can take you to any floor, while LL are like stai
 HEAD is the first element of the list. TAIL is the last element of the list.
 
 Try visualGo website for visualization
+
 1. https://visualgo.net/en/list?mode=LL
 2. https://visualgo.net/en/list?mode=DLL
 3. https://leetcode.com/explore/learn/card/linked-list/ (suggested by google)
@@ -37,19 +38,21 @@ Example -> Browser forward backward button
 LL are required to build stack and queue
 
 ### Doubly LL
+
 it has two pointers on each node - next and prev
 
-insertion - O(1)
-removal - O(1)  // it is O(n) for single LL
+insertion - O(index)
+removal - O(1) // it is O(n) for single LL
 Searching - O(n)
 Access - O(n) as we have to loop
 
-
 ### What is a Cycle in a Linked List?
+
 - A cycle in a linked list occurs when a node's next pointer points back to a previous node in the list, rather than pointing to null. This creates a loop, making it possible to traverse the list indefinitely without ever reaching an end.
 
 #### Why is this Important?
+
 - Detecting cycles in a linked list is important for several reasons:
 
 - Cycles can cause infinite loops in algorithms that traverse the list.
-Identifying cycles can help in debugging and ensuring data integrity.
+  Identifying cycles can help in debugging and ensuring data integrity.
