@@ -43,3 +43,13 @@ insertion - O(1)
 removal - O(1)  // it is O(n) for single LL
 Searching - O(n)
 Access - O(n) as we have to loop
+
+
+### What is a Cycle in a Linked List?
+- A cycle in a linked list occurs when a node's next pointer points back to a previous node in the list, rather than pointing to null. This creates a loop, making it possible to traverse the list indefinitely without ever reaching an end.
+
+#### Why is this Important?
+- Detecting cycles in a linked list is important for several reasons:
+
+- Cycles can cause infinite loops in algorithms that traverse the list.
+Identifying cycles can help in debugging and ensuring data integrity.
