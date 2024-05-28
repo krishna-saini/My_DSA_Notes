@@ -64,6 +64,9 @@ console.log('krishna 1', removeNodeFromEnd(head, 2)); // O(L)+O(L)
  * can reduce one looping of LL
  * Intuition - use two pointer both pointing to head
  * move fast pointer `n` steps ahead
+ * 
+ * then move both together 
+ * in this way, first pointer will be once place behind the node to be removed
  *
  */
 
