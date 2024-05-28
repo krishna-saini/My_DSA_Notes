@@ -42,7 +42,7 @@ const isPalindrome = (head) => {
   let current = head;
   let slowPointer = head;
   let fastPointer = head;
-  while (fastPointer && fastPointer.next) {
+  while (fastPointer && fastPointer.next && fastPointer.next.next) {
     slowPointer = slowPointer.next;
     fastPointer = fastPointer.next.next; // Tortoise and Hare algorithm
   }
@@ -68,3 +68,13 @@ const isPalindrome = (head) => {
   reverseList(reversedSecondHalfHead);
   return true;
 };
+
+let head = new ListNode(1);
+head.next = new ListNode(1);
+head.next.next = new ListNode(2);
+head.next.next.next = new ListNode(1);
+// head.next.next.next = new ListNode(6);
+// head.next.next.next = new ListNode(4);
+// head.next.next.next.next = new ListNode(7);
+
+console.log('krishng nodes 2', isPalindrome(head));
