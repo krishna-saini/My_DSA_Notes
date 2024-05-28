@@ -43,7 +43,7 @@ const findPos = (head) => {
   while (fast && fast.next) {
     // O(n)
     slow = slow.next;
-    fast = fast.next.next;
+    fast = fast.next.next;  // Tortoise and Hare algorithm
 
     // checking if these pointers point to the same node object in memory, not whether the contents of the nodes are the same.
     if (slow === fast) {
