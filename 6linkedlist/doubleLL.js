@@ -67,20 +67,22 @@ class DoublyLL {
   get(index) {
     // you have to loop only unlike arr
     if (!this.head) return undefined;
-    if (index > this.length) return undefined;
+    if (index < 0 || index >= this.length) return undefined;
     let counter = 0;
     let current = this.head;
-    while (counter === index) {
+    while (counter !== index) {
       current = current.next;
       counter++;
     }
+
     return current;
   }
 
   /**
-   * change the value of a node based on its index in the LL
+   * change the value of a node based on its index in the LL.
+   * it is meant to change value of existing node.
    * it accepts a value and an index
-   * use the get functin to find the specific node
+   * use the get function to find the specific node
    * if node not found, return undefined/false;
    * else change the value of that node and return the list/true
    */
@@ -91,8 +93,8 @@ class DoublyLL {
     return this;
   }
 
-  insert(value, index) {
-    if (index > 0 || index > this.length) {
+  insert(val, index) {
+    if (!val || !index || index < 0 || index > this.length) {
       return undefined;
     }
     if (index === 0) {
@@ -114,7 +116,7 @@ class DoublyLL {
   }
 
   delete(index) {
-    if (index < 0 || index > this.length) {
+    if (!index || index < 0 || index > this.length) {
       return undefined;
     }
     if (index === 0) return this.shift();
@@ -132,7 +134,7 @@ class DoublyLL {
     let prevNode = null;
     let nextNode = null;
     let currentNode = this.head;
-    while (current) {
+    while (currentNode) {
       nextNode = currentNode.next;
 
       currentNode.next = prevNode;
@@ -149,3 +151,19 @@ class DoublyLL {
     return this;
   }
 }
+
+// testing
+const list = new DoublyLL();
+list.push('krishna'); // O(1)
+list.push('enjoying');
+list.push('learning DSA');
+// list.pop();   // O(1)
+// list.unshift("The")  // O(1)
+// list.shift();  // O(1)
+
+list.set('very much', 2); // O(n)
+list.insert('learning DSA', 2); // O(n)
+list.delete(1); // O(n)
+list.reverse(); // O(n)
+console.log('krishna', list);
+console.log('krisna get ', list.get(3));
