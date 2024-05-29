@@ -1,4 +1,6 @@
 {
+  "type": "module",
+  "name": "dsa",
   "dependencies": {
     "nvm": "^0.0.4"
   },
