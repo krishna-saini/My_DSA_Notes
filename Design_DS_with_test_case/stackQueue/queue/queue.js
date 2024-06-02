@@ -5,6 +5,13 @@ class Node {
   }
 }
 
+/**
+ * In a queue implemented using a linked list, 
+ * the front node should have a reference to the next node, 
+ * which would be the node just next to it (the "next" node). 
+ * The rear node (i.e., the node that was added last and is at the end of the queue) 
+ * should have next set to null, indicating that there are no nodes after it.
+ */
 export default class LinearQueue {
   constructor() {
     this.front = null;
@@ -40,7 +47,6 @@ export default class LinearQueue {
     // check if there is only one node
     if (!this.front.next) {
       this.front = null;
-      this.rear = null;
     }
     this.front = this.front.next;
     this.size--;
