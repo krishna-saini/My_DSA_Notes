@@ -6,10 +6,10 @@ class Node {
 }
 
 /**
- * In a stack implemented using a linked list, 
- * the top node should have a reference to the next node, 
- * which would be the node just below it (the "next" node). 
- * The bottom node (i.e., the node that was added first and is at the bottom of the stack) 
+ * In a stack implemented using a linked list,
+ * the top node should have a reference to the next node,
+ * which would be the node just below it (the "next" node).
+ * The bottom node (i.e., the node that was added first and is at the bottom of the stack)
  * should have next set to null, indicating that there are no nodes below it.
  */
 export default class Stack {
@@ -31,7 +31,7 @@ export default class Stack {
     }
     this.size++;
 
-    return this;
+    // return this;
   }
 
   pop() {
@@ -43,8 +43,11 @@ export default class Stack {
     // check if there is only one node
     if (!this.top.next) {
       this.top = null;
+      this.bottom = null;
+    } else {
+      this.topNode = this.topNode.next; // Detach the top node by moving the topNode reference to the next node
     }
-    this.top = this.top.next;
+
     this.size--;
 
     return output.value;
