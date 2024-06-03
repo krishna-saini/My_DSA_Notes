@@ -45,3 +45,9 @@ const previousGreater = (numbers) => {
 
   return result;
 };
+
+// overall, the operations inside the inner while loop are constant time operations (O(1)).
+// The loop may execute multiple times, but the number of iterations is bounded by 
+// the number of elements already in the stack. Since each element is pushed onto
+// the stack at most once and popped at most once, the total time complexity remains O(n),
+// where n is the number of temperatures in the input array.
