@@ -54,6 +54,6 @@ const merge = (arr, low, mid, high) => {
 console.log(mergeSort([2, 5, 1, 3, 9, 0, 8]));
 
 
-// TC - N*LogN
-// SC - O(n) because of temp + ignoring recursive stack space
+// TC - N*LogN - avg/best/worst
+// SC - O(n) because of temp array + ignoring recursive stack space
 

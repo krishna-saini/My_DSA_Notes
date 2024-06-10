@@ -43,3 +43,9 @@ const partition = (arr, low, high) => {
 
 console.log('krishn a', quickSort([3, 1, 2], 0, 2));
 // console.log('partition', quickSort([17, 6, 2, 8, 3], 0, 4));
+
+
+// TC - NlogN - avg case 
+// SC O(1) ignoring recursive stack
+// Worst Case: O(n 2), which occurs when the pivot selection results in highly unbalanced
+// partitions (e.g., always picking the smallest or largest element as the pivot in a sorted array).
