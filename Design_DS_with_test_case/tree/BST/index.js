@@ -53,32 +53,50 @@ export class BinarySearchTree {
   /**
    * search / find operation
    */
-  search(searchValue){
-    if(!this.rootNode){
+  search(searchValue) {
+    if (!this.rootNode) {
       return null;
     }
 
     let currentNode = this.rootNode;
 
-    while(true){
-      if(currentNode.value === searchValue){
+    while (currentNode) {
+      if (currentNode.value === searchValue) {
         return currentNode;
       }
 
-      if(searchValue < currentNode.value){
+      if (searchValue < currentNode.value) {
         // search in left side
-        if(!currentNode.leftNode){
-          return null;
-        }
         currentNode = currentNode.leftNode;
-      }else if ( searchValue > currentNode.value){
+      } else if (searchValue > currentNode.value) {
         // seach in right side
-        if(!currentNode.rightNode){
-          return null;
-        }
         currentNode = currentNode.rightNode;
       }
     }
+    return currentNode; // returning null
+  }
+
+  bfs() {
+    if (!this.rootNode) return [];
+    let currentNode = this.rootNode;
+    const result = [];
+    const queue = [];
+
+    queue.push(currentNode);
+
+    while (queue.length) {
+      currentNode = queue.shift();
+      result.push(currentNode.value);
+
+      if (currentNode.leftNode) {
+        queue.push(currentNode.leftNode);
+      }
+
+      if (currentNode.rightNode) {
+        queue.push(currentNode.rightNode);
+      }
+    }
+    return result;
   }
 
   get(key) {}
