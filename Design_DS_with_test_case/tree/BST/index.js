@@ -99,6 +99,53 @@ export class BinarySearchTree {
     return result;
   }
 
+  preOrderDFS() {
+    const result = [];
+
+    const traverse = (node) => {
+      result.push(node.value);
+      if (node.leftNode) {
+        traverse(node.leftNode);
+      }
+
+      if (node.rightNode) {
+        traverse(node.rightNode);
+      }
+    };
+
+    traverse(this.rootNode);
+    return result;
+  }
+
+  postOrderDFS(node = this.rootNode, result = []) {
+    if (node.leftNode) {
+      this.postOrderDFS(node.leftNode, result);
+    }
+
+    if (node.rightNode) {
+      this.postOrderDFS(node.rightNode, result);
+    }
+
+    // push at the end of the branch
+    result.push(node.value);
+
+    return result;
+  }
+
+  inOrderDFS(node = this.rootNode, result = []) {
+    if (node.leftNode) {
+      this.inOrderDFS(node.leftNode, result);
+    }
+
+    result.push(node.value);
+
+    if (node.rightNode) {
+      this.inOrderDFS(node.rightNode, result);
+    }
+
+    return result;
+  }
+
   get(key) {}
 
   delete(key) {}
