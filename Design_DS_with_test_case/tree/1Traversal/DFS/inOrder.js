@@ -14,7 +14,7 @@ function inOrderDFS(node, result = []) {
   result.push(node.value);
 
   if (node.rightNode) {
-    preOrderDFS(node.rightNode, result);
+    inOrderDFS(node.rightNode, result);
   }
 
   return result;

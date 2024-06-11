@@ -132,6 +132,7 @@ export class BinarySearchTree {
     return result;
   }
 
+  // In a binary search tree (BST), in-order traversal visits nodes in sorted order
   inOrderDFS(node = this.rootNode, result = []) {
     if (node.leftNode) {
       this.inOrderDFS(node.leftNode, result);
