@@ -20,11 +20,39 @@ function inOrderDFS(node, result = []) {
   return result;
 }
 
+/**
+ * Solve it using iterations
+ * Use a stack to keep track of nodes. This helps us backtrack to the parent node after visiting the left subtree.
+ */
+const inOrderIterativeDFS = (rootNode) => {
+  const stack = [];
+  const result = [];
+  let currentNode = rootNode;
+
+  // looop while current node is null or stack is not empty
+  while (currentNode || stack.length) {
+    // Traverse to the leftmost node until current is not null
+    while (currentNode) {
+      stack.push(currentNode);
+      currentNode = currentNode.leftNode;
+    }
+    // currentNode will be null after this loop
+
+    // process the Node
+    currentNode = stack.pop();
+    result.push(currentNode.value);
+
+    // Explore Right Subtree:
+    currentNode = currentNode.rightNode;
+  }
+  return result;
+};
+
 class TreeNode {
   constructor(value) {
     this.value = value;
     this.leftNode = null;
-    this.right = null;
+    this.rightNode = null;
   }
 }
 

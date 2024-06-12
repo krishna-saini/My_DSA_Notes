@@ -34,29 +34,28 @@
 -
 
 ## Traversal and search methods
-
 - tree
   . . 1 . .
   . 2 . 3 .
   4 5 6 7
-
-### pre order traversal
-
-- (1 2 4 5 3 6 7) : A walk in which each parent node is traversed before its children. 
--In a binary search tree (BST), Pre-order DFS is useful for creating a copy of a tree or serializing a tree structure.
-- It's used in applications like parsing arithmetic expressions into expression trees.
-
-### post order traversal
-
-- (4 5 2 6 7 3 1): a walk in which the children are traversed before their respective parents are traversed
-- Post-order DFS is useful for deleting a tree or freeing the memory allocated to a tree.
-- It's commonly used in evaluating arithmetic expressions in postfix notation.
 
 ### in order traversal
 
 - (4 2 5 1 6 3 7 )
 - in-order traversal visits nodes in sorted order for BST.
 - It can be used for expression tree evaluation, especially in arithmetic expressions where operands are stored in leaves and operators in internal nodes
+### post order traversal
+- (4 5 2 6 7 3 1): a walk in which the children are traversed before their respective parents are traversed
+- Post-order DFS is useful for deleting a tree or freeing the memory allocated to a tree.
+- It's commonly used in evaluating arithmetic expressions in postfix notation.
+
+### pre order traversal
+
+- (1 2 4 5 3 6 7) : A walk in which each parent node is traversed before its children.
+  -In a binary search tree (BST), Pre-order DFS is useful for creating a copy of a tree or serializing a tree structure.
+- It's used in applications like parsing arithmetic expressions into expression trees.
+
+
 
 ### DFS
 
@@ -75,3 +74,18 @@
 - BFS is guaranteed to find the shortest path between the starting node and any other reachable node in an unweighted graph.
 - It is optimal for finding the shortest path.
 - It requires more memory to keep track of all the nodes at the current level.
+
+
+### Traversal Methods: DFS vs BFS
+
+| **Feature**             | **DFS**                                                                                      | **BFS**                                                                          |
+|-------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Description**         | Starts at root, explores as far as possible along each branch before backtracking.           | Starts at root, explores neighbor nodes at current level before moving to next level. |
+| **Implementation**      | Stack or recursion                                                                          | Queue                                                                           |
+| **Pros**                | Memory-efficient, deep exploration                                                          | Finds shortest path, optimal for shortest paths                                   |
+| **Cons**                | May get lost in infinite branches                                                           | Requires more memory                                                             |
+| **Use Case Example**    | Pathfinding in deep mazes or puzzles                                                        | Chess engines finding win positions                                              |
+| **Guarantee**           | Not guaranteed to find shortest path or a solution if branches are infinite                 | Guaranteed to find a solution if one exists, and finds shortest path in unweighted graphs |
+| **Memory Usage**        | Generally less memory usage as it explores deeply                                           | More memory needed to track all nodes at current level                           |
+
+

@@ -24,6 +24,35 @@ function preOrderDFS(node, result = []) {
   return result;
 }
 
+/**
+ * Do the same using iterative approach using stack
+ */
+var preorderIterativeDFS = function (root) {
+  if (!root) {
+    return [];
+  }
+  const stack = [root];
+  const result = [];
+  while (stack.length) {
+    let currentNode = stack.pop();
+    result.push(currentNode.val);
+    /**
+Push right child before left in stack
+this ensures that left which should be processed first in preorder traversal
+is visited before the right child
+ */
+    if (currentNode.right) {
+      stack.push(currentNode.right);
+    }
+
+    if (currentNode.left) {
+      stack.push(currentNode.left);
+    }
+  }
+
+  return result;
+};
+
 class TreeNode {
   constructor(value) {
     this.value = value;
