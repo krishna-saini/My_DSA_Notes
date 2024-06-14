@@ -43,30 +43,60 @@ const postOrderTraversalIterative = function (root) {
     postOrderStack.push(currentNode);
 
     // Push left and right children to the traversal stack
-    if (currentNode.left) {
-      traversalStack.push(currentNode.left);
+    if (currentNode.leftNode) {
+      traversalStack.push(currentNode.leftNode);
     }
-    if (currentNode.right) {
-      traversalStack.push(currentNode.right);
+    if (currentNode.rightNode) {
+      traversalStack.push(currentNode.rightNode);
     }
   }
 
   // Construct the result from the post-order stack
   while (postOrderStack.length) {
     const node = postOrderStack.pop();
-    result.push(node.val);
+    result.push(node.value);
   }
 
   return result;
 };
 
+/**
+ * Function to perform post-order traversal on a binary tree iteratively using single stacks.
+ * @param {TreeNode} root - The root node of the binary tree.
+ * @returns {number[]} - Array of node values in post-order sequence.
+ */
+const postOrderTraversalBySingleStack = (root) => {
+  const stack = [];
+  const result = [];
+  let currentNode = root;
+  let lastVisitedNode = null; //  This helps determine whether to move to the right child or process the current node.
 
+  // Loop until there are nodes to be processed.
+  while (currentNode || stack.length) {
+    // Traverse to the leftmost node, pushing all nodes onto the stack.
+    if (currentNode) {
+      stack.push(currentNode);
+      currentNode = currentNode.leftNode;
+    } else {
+      let peekNode = stack[stack.length - 1];
+      // If the right child exists and hasn't been processed yet, move to the right child.
+      if (peekNode.rightNode && peekNode.rightNode !== lastVisitedNode) {
+        currentNode = peekNode.rightNode;
+      } else {
+        // if no right node, Process the node
+        result.push(stack.pop().value);
+        lastVisitedNode = peekNode;
+      }
+    }
+  }
+  return result;
+};
 
 class TreeNode {
   constructor(value) {
     this.value = value;
     this.leftNode = null;
-    this.right = null;
+    this.rightNode = null;
   }
 }
 
