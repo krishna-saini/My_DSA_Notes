@@ -20,6 +20,48 @@ function postOrderDFS(node, result = []) {
   return result;
 }
 
+/**
+ * Function to perform post-order traversal on a binary tree iteratively using two stacks.
+ * @param {TreeNode} root - The root node of the binary tree.
+ * @returns {number[]} - Array of node values in post-order sequence.
+ */
+const postOrderTraversalIterative = function (root) {
+  if (!root) {
+    return [];
+  }
+
+  // Stack to assist in traversal
+  const traversalStack = [root];
+  // Stack to store nodes in reverse post-order sequence
+  const postOrderStack = [];
+  // Array to store the final result
+  const result = [];
+
+  // Traverse the tree
+  while (traversalStack.length) {
+    let currentNode = traversalStack.pop();
+    postOrderStack.push(currentNode);
+
+    // Push left and right children to the traversal stack
+    if (currentNode.left) {
+      traversalStack.push(currentNode.left);
+    }
+    if (currentNode.right) {
+      traversalStack.push(currentNode.right);
+    }
+  }
+
+  // Construct the result from the post-order stack
+  while (postOrderStack.length) {
+    const node = postOrderStack.pop();
+    result.push(node.val);
+  }
+
+  return result;
+};
+
+
+
 class TreeNode {
   constructor(value) {
     this.value = value;
