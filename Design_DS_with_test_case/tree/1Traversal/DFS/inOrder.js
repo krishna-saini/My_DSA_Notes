@@ -32,18 +32,19 @@ const inOrderIterativeDFS = (rootNode) => {
   // looop while current node is null or stack is not empty
   while (currentNode || stack.length) {
     // Traverse to the leftmost node until current is not null
-    while (currentNode) {
+    if (currentNode) {
       stack.push(currentNode);
       currentNode = currentNode.leftNode;
+    } else {
+      // currentNode will be null after this loop
+
+      // process the Node
+      currentNode = stack.pop();
+      result.push(currentNode.value);
+
+      // Explore Right Subtree:
+      currentNode = currentNode.rightNode;
     }
-    // currentNode will be null after this loop
-
-    // process the Node
-    currentNode = stack.pop();
-    result.push(currentNode.value);
-
-    // Explore Right Subtree:
-    currentNode = currentNode.rightNode;
   }
   return result;
 };

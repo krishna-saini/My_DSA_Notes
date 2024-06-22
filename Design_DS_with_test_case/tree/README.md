@@ -41,17 +41,18 @@
 
 ### in order traversal
 
-- (4 2 5 1 6 3 7 )
+- (4 2 5 1 6 3 7 ) -> Left , root , Right
 - in-order traversal visits nodes in sorted order for BST.
 - It can be used for expression tree evaluation, especially in arithmetic expressions where operands are stored in leaves and operators in internal nodes
 ### post order traversal
-- (4 5 2 6 7 3 1): a walk in which the children are traversed before their respective parents are traversed
+- (4 5 2 6 7 3 1): left Right ROOT
+- a walk in which the children are traversed before their respective parents are traversed
 - Post-order DFS is useful for deleting a tree or freeing the memory allocated to a tree.
 - It's commonly used in evaluating arithmetic expressions in postfix notation.
 
 ### pre order traversal
 
-- (1 2 4 5 3 6 7) : A walk in which each parent node is traversed before its children.
+- (1 2 4 5 3 6 7) : Root, Left,Right ->A walk in which each parent node is traversed before its children.
   -In a binary search tree (BST), Pre-order DFS is useful for creating a copy of a tree or serializing a tree structure.
 - It's used in applications like parsing arithmetic expressions into expression trees.
 
@@ -64,9 +65,13 @@
 
 - may get lost in an infinite branch and never make it to the solution node
 - DFS is generally more memory-efficient compared to BFS as it explores deeply before backtracking
+- TC - The algorithm visits each node exactly once, performing a constant amount of work for each node (pushing to and popping from the stack, and adding the node's value to the result array).- O(n)
+- SC - The space complexity is determined by the maximum size of the stack, which depends on the height of the tree.
+in worst case (fully unbalanced tree )- O(n)
+in avg case - O(logn)
 
 ### BFS
-
+- output - 1 2 3 4 5 6 7
 - It starts at the tree root and explores the neighbor nodes first at the current level, before moving to the next level neighbors
 - Extra memory, usually a queue, is needed to keep track of the child nodes that were encountered but not yet explored.BFS is typically implemented iteratively.
 - eg:- in a chess endgame, a chess engine may build the game tree from the current position by applying all possible moves and use breadth-first search to find a win position for White
@@ -74,6 +79,8 @@
 - BFS is guaranteed to find the shortest path between the starting node and any other reachable node in an unweighted graph.
 - It is optimal for finding the shortest path.
 - It requires more memory to keep track of all the nodes at the current level.
+- space complexity of the algorithm will be O(W) for the queue, where W is the maximum number of nodes on any level. The space complexity of the above algorithm will be O(N) as we need to return a list containing the level order traversal. 
+- The time complexity of the above algorithm is O(N), where N is the total number of nodes in the tree. This is due to the fact that we traverse each node once
 
 
 ### Traversal Methods: DFS vs BFS

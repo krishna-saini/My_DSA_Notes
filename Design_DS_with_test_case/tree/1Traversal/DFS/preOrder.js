@@ -35,7 +35,7 @@ var preorderIterativeDFS = function (root) {
   const result = [];
   while (stack.length) {
     let currentNode = stack.pop();
-    result.push(currentNode.val);
+    result.push(currentNode.value);
     /**
 Push right child before left in stack
 this ensures that left which should be processed first in preorder traversal
