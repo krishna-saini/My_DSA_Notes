@@ -9,7 +9,7 @@ const fibonacci = (n) => {
   if (n < 2) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 };
-console.log(fibonacci(3))
+console.log(fibonacci(3));
 
 // Time complexity = work done per node * number of nodes = O(1) * 2^n = O(2^n)
 
@@ -29,7 +29,7 @@ console.log(fibonacci(3))
 
 function fibonacciMemo(n, memo = {}) {
   if (n <= 0) {
-    return "Invalid input";
+    return 'Invalid input';
   } else if (n === 1) {
     return 0;
   } else if (n === 2) {
@@ -37,7 +37,7 @@ function fibonacciMemo(n, memo = {}) {
   } else if (memo[n]) {
     return memo[n];
   } else {
-    memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+    memo[n] = fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo);
     return memo[n];
   }
 }
@@ -55,3 +55,26 @@ function fibonacciMemo(n, memo = {}) {
 // and the work is constant time
 // so, total time complexity is n * 1 = n
 // SC: O(n) - recursive stack space
+
+/**
+ * the above approach of solving is DP with memo(top-down)
+ * but it is still using recursion which can cause max call stack exceeded errror
+ * for very large numbers, try for 1000th
+ *
+ * Solution is to use DP with tabulation(bottom-up)
+ */
+
+const fibonacciTabular = (n) => {
+  if (n < 0) return 0;
+  if (n <= 2) return n;
+  // we already know output for first 3 numbers₹
+  const output = [0, 1, 1];
+  for (let i = 3; i <= n; i++) {
+    output[i] = output[i - 1] + output[i - 2];
+  }
+  return output[n];
+};
+
+// TC - O(n)
+// SC - O(n)
+// no call stack exceeded problem
