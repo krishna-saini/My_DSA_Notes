@@ -69,8 +69,15 @@ console.log(countWaysToConstructSumFromDiceMemo(6));
 // TC
 // computation of base case C(0) = O(1)
 // C(1) = C(0)
-// C(2) = C(1)+C(0) O(1)
+// C(2) = C(1)+C(0) -> O(1)
 // C(n) = sum(i=1 to i=6)C(n-i) where this will be either equal to computations we have
 // done above or can be ignored if n-i < 0. 
 // hence overall TC O(n)
+
+/**
+ * The number of unique subproblems is n + 1 (for each possible value from 0 to n).
+ * For each subproblem, the function does a constant amount of work,
+ *  looping over 6 dice outcomes.
+ * T(n)=O(n)⋅O(6)=O(6n)=O(n)
+ */
 

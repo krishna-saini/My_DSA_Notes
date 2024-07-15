@@ -23,6 +23,4 @@ const bubbleSort = (arr) => {
 };
 console.log('krishna', bubbleSort([2, 5, 1, 0, 8, 4]));
 
-// TC - O(n^2)
--
-.
+// TC - O(n^2) 

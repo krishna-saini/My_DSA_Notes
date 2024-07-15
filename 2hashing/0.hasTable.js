@@ -60,3 +60,16 @@ console.log(ht.get("Canada")); // [ 'Canada', 300 ]
 console.log(ht.get("France")); // [ 'France', 100 ]
 console.log(ht.get("Spain"));
 console.log(ht.remove("name"));
+
+
+// collision 
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+      hash += str.charCodeAt(i);
+  }
+  return hash % 10;
+}
+
+console.log(simpleHash("abc")); // Outputs: 4
+console.log(simpleHash("cba")); // Outputs: 4
