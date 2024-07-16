@@ -33,21 +33,36 @@ var maxSubArray = function (nums) {
   let minPrefixSum = 0;
   let maxSubArraySum = -Infinity;
 
+  // Variables to keep track of the maximum subarray sum and its start and end indices
+  let minPrefixSumIndex = -1; // Index corresponding to the minimum prefix sum
+  let start = 0; // Starting index of the maximum subarray
+  let end = 0; // Ending index of the maximum subarray
+
   // Find max subarray sum using prefix sum array
   for (let i = 0; i < prefix.length; i++) {
     // Calculate the potential max subarray sum ending at index i
-    maxSubArraySum = Math.max(maxSubArraySum, prefix[i] - minPrefixSum);
+    // maxSubArraySum = Math.max(maxSubArraySum, prefix[i] - minPrefixSum);
+    if (prefix[i] - minPrefixSum > maxSubArraySum) {
+      maxSubArraySum = prefix[i] - minPrefixSum;
+      start = minPrefixSumIndex + 1;
+      end = i;
+    }
 
     // Update the min prefix sum encountered so far
-    minPrefixSum = Math.min(minPrefixSum, prefix[i]);
+    // minPrefixSum = Math.min(minPrefixSum, prefix[i]);
+    if (prefix[i] < minPrefixSum) {
+      minPrefixSum = prefix[i];
+      minPrefixSumIndex = i;
+    }
   }
 
-  return maxSubArraySum;
+  // return maxSubArraySum;
+  return nums.slice(start, end + 1);
 };
 
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Output: 6
 
-// TC = O(n) = SC
+// TC =  O(n) = SC
 
 // optimal soultion using Kadane algo
 
