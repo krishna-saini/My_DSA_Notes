@@ -34,7 +34,7 @@ console.log(longestSubArrOfGivenSum([1, 2, 3, 4, 2, -1, 1], 6));
 // use Hashmap to track preSum of all the elements upto the index
 
 const longestSubArrOfGivenSumOptimal = (arr, k) => {
-  let map = new Map();
+  let map = new Map(); // stores sum with first index
   let maxLen = 0;
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
@@ -42,10 +42,9 @@ const longestSubArrOfGivenSumOptimal = (arr, k) => {
     if (!map.has(sum)) {
       map.set(sum, i); //storing sum with its index
     }
-    if (sum === k) {
-      // current length of subarray = i+1
-      maxLen = Math.max(maxLen, i + 1);
-    }
+    // dont update map if sum encounter again as we need to find length
+    // it is because if ther are 0s in between, they wont be part of map if we update them
+    // try [2,0,0,0,3] k = 3
 
     const remaining = sum - k;
     // check if remaining exists in map
@@ -70,6 +69,6 @@ console.log(longestSubArrOfGivenSumOptimal([1, 2, 3, 4, 2, -1, 1], 6));
 // Yes if we have only positive and/or zeroes in array, then
 // we can use two pointer method to make SC O(1)
 
-// but it wont work for array with negetive numbers as 
+// but two pointer wont work for array with negetive numbers as 
 // the sum of array may become always < k due to negetive numbers.
 // try dry running two pointer on [-1,-1,10] & k=0;
