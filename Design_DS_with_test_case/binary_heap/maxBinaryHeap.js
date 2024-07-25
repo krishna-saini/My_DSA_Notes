@@ -4,6 +4,17 @@
  * root is the largest node
  */
 
+/**
+ * TC for insertion/deletion - O(logN)
+ * in worst case
+ * as , the bubble up need to perform at each level for insertion 
+ * as  the bubbledown operation might need to perform comparisons and swaps at each level from the root down to a leaf for deletion
+ * 
+ * SC is O(N) 
+ * 
+ * N is number of nodes
+ */
+
 class MaxBinaryHeap {
   constructor() {
     this.values = [];
@@ -116,6 +127,10 @@ class MaxBinaryHeap {
    * remove all instances of given value
    */
   removeAll = (value) => {};
+
+  size() {
+    return this.values.length;
+  }
 }
 
 const maxHeap = new MaxBinaryHeap();
@@ -130,4 +145,4 @@ console.log(maxHeap.values);
 maxHeap.extractMax();
 console.log(maxHeap.values);
 maxHeap.extractMax();
-console.log(maxHeap.values);
+console.log(typeof maxHeap, maxHeap.size());
