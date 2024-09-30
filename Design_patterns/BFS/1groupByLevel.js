@@ -43,3 +43,25 @@ const groupByLevelBFS = (rootNode) => {
   }
   return result;
 };
+// Create a general tree
+let generalRoot = new TreeNode(1);
+let child2 = new TreeNode(2);
+let child3 = new TreeNode(3);
+let child4 = new TreeNode(4);
+
+generalRoot.addChild(child2);
+generalRoot.addChild(child3);
+generalRoot.addChild(child4);
+
+let child5 = new TreeNode(5);
+let child6 = new TreeNode(6);
+child2.addChild(child5);
+child2.addChild(child6);
+
+let child7 = new TreeNode(7);
+child3.addChild(child7);
+
+let child8 = new TreeNode(8);
+child4.addChild(child8);
+const output = groupByLevelBFS(generalRoot);
+console.log("group by level:", output[0], output[1], output[2]);
