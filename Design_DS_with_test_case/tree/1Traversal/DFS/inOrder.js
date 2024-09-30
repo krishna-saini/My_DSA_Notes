@@ -1,5 +1,5 @@
 /**
- * In order traversal: a walk in which the children are traversed before their respective parents are traversed
+ * In order traversal: Left root right, sorted
  * its implementation is same as pre-order except push only when there is no left
  */
 function inOrderDFS(node, result = []) {

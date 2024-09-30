@@ -27,7 +27,7 @@ export class BinarySearchTree {
     while (true) {
       if (newNode.value === currentNode.value) {
         // based upon the choice, we can either return Undefined
-        // or can add frequency in front of the node like 10(2)
+        // or can add frequency in front of the node like 10(2) using this.count for each node
         // or insert it in left/right.
         // ask this question while implementing it
         return undefined;
@@ -52,6 +52,7 @@ export class BinarySearchTree {
 
   /**
    * search / find operation
+   * TC- O(logn ) avg case
    */
   search(searchValue) {
     if (!this.rootNode) {
@@ -103,6 +104,7 @@ export class BinarySearchTree {
     const result = [];
 
     const traverse = (node) => {
+      // push in the starting only
       result.push(node.value);
       if (node.leftNode) {
         traverse(node.leftNode);
@@ -137,7 +139,7 @@ export class BinarySearchTree {
     if (node.leftNode) {
       this.inOrderDFS(node.leftNode, result);
     }
-
+ // push at the end of left subtree
     result.push(node.value);
 
     if (node.rightNode) {
@@ -147,17 +149,17 @@ export class BinarySearchTree {
     return result;
   }
 
-  get(key) {}
-
+  // search the node and deletes it
   delete(key) {}
 
   iterable() {}
 }
 
-const tree = new BinarySearchTree();
-tree.insert(20);
-tree.insert(10);
-tree.insert(30);
-tree.insert(15);
-tree.insert(25);
-console.log(tree);
+const bst = new BinarySearchTree();
+[5,3,7,1,6,13,4].forEach(value => bst.insert(value));
+console.log(bst);
+console.log("bfs traversal:", bst.bfs());
+console.log("inorder traversal:", bst.inOrderDFS());
+console.log("preorder traversal:", bst.preOrderDFS());
+console.log("postOrderDFSrder traversal:", bst.postOrderDFS());
+

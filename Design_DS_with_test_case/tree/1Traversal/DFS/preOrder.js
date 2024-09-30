@@ -38,6 +38,7 @@ var preorderIterativeDFS = function (root) {
     result.push(currentNode.value);
     /**
 Push right child before left in stack
+since stack is LIFO
 this ensures that left which should be processed first in preorder traversal
 is visited before the right child
  */
@@ -70,5 +71,5 @@ rootNode.rightNode.leftNode = new TreeNode(6);
 rootNode.rightNode.rightNode = new TreeNode(7);
 
 const result = preOrderDFS(rootNode);
-
+console.log("tree is:", rootNode)
 console.log(result);

@@ -25,8 +25,10 @@
 - the value of the right child is always larger than or equal to the value of its parent.
 - This property makes it suitable for searching operations as at each node we can decide accurately whether the value will be in left subtree or right subtree. Therefore, it is called a Search Tree.
 - Binary search trees can be used to implement abstract data types such as dynamic sets, lookup tables and priority queues, and used in sorting algorithms such as tree sort.
-- TC: avg case O(logn) for searching and insertion
-- TC: worst case O(n) - This occurs when the tree becomes a linked list (degenerate tree) with nodes only on one side.
+- TC: avg case O(logn) for searching
+- TC: worst case O(n) - This occurs when the tree becomes a linked list (degenerate tree) with nodes only on one side. 
+- TC is O(n) for insertion/deletion for worst case as we need to search for that
+
 
 ### AVL tree
 
@@ -64,21 +66,32 @@
 - can be implemented using stack or recursion
 
 - may get lost in an infinite branch and never make it to the solution node
-- DFS is generally more memory-efficient compared to BFS as it explores deeply before backtracking
+- DFS is generally more memory-efficient compared to BFS as it explores deeply before backtracking. DFS only needs to keep track of nodes along the current path, while BFS needs to store all nodes at the current level.
+
+#### TC & SC
 - TC - The algorithm visits each node exactly once, performing a constant amount of work for each node (pushing to and popping from the stack, and adding the node's value to the result array).- O(n)
 - SC - The space complexity is determined by the maximum size of the stack, which depends on the height of the tree.
 in worst case (fully unbalanced tree )- O(n)
 in avg case - O(logn)
 
+#### Applications
+- used where memory efficiency is priority. for eg, When the tree is very wide. For instance, in a social network with many connections, DFS can explore deep relationships without overwhelming memory resources.
+- If the target node lies deep within the graph/tree, DFS can find it efficiently. DFS dives deep into one branch before backtracking, making it well-suited for situations where the solution is far from the starting point.  This approach is useful in scenarios like maze solving or exploring deep dependencies in a project.
+
 ### BFS
 - output - 1 2 3 4 5 6 7
 - It starts at the tree root and explores the neighbor nodes first at the current level, before moving to the next level neighbors
+
+#### Applications
 - Extra memory, usually a queue, is needed to keep track of the child nodes that were encountered but not yet explored.BFS is typically implemented iteratively.
 - eg:- in a chess endgame, a chess engine may build the game tree from the current position by applying all possible moves and use breadth-first search to find a win position for White
-- Implicit trees (such as game trees or other problem-solving trees) may be of infinite size; breadth-first search is guaranteed to find a solution node if one exists.
+- Implicit trees (such as game trees or other problem-solving trees) may be of infinite size/very deep tree; breadth-first search is guaranteed to find a solution node if one exists.
+- If the target node is near the starting point, BFS can find it quickly. BFS explores all nodes at the current depth level before moving to the next, ensuring that the closest nodes are checked first. This makes BFS efficient for finding solutions that are near the root. For example, in a social network, if you’re looking for immediate friends, BFS will quickly identify them by exploring all first-degree connections before moving on to second-degree connections.
 - BFS is guaranteed to find the shortest path between the starting node and any other reachable node in an unweighted graph.
-- It is optimal for finding the shortest path.
+- It is optimal for finding the shortest path. It explores all nodes at the current depth level, ensuring that the first time it reaches the target node, it has found the shortest path. This makes BFS ideal for applications where the shortest path is crucial(time + resources), such as in GPS navigation systems or emergency response planning
 - It requires more memory to keep track of all the nodes at the current level.
+
+#### TC & SC
 - space complexity of the algorithm will be O(W) for the queue, where W is the maximum number of nodes on any level. The space complexity of the above algorithm will be O(N) as we need to return a list containing the level order traversal. 
 - The time complexity of the above algorithm is O(N), where N is the total number of nodes in the tree. This is due to the fact that we traverse each node once
 
@@ -91,8 +104,8 @@ in avg case - O(logn)
 | **Implementation**      | Stack or recursion                                                                          | Queue                                                                           |
 | **Pros**                | Memory-efficient, deep exploration                                                          | Finds shortest path, optimal for shortest paths                                   |
 | **Cons**                | May get lost in infinite branches                                                           | Requires more memory                                                             |
-| **Use Case Example**    | Pathfinding in deep mazes or puzzles                                                        | Chess engines finding win positions                                              |
+| **Use Case Example**    | 1. DFS can quickly find a solution without considering the shortest path.suitable for applications where finding any solution is more important than finding the optimal one. eg sudoku                                                         | 1. If the target node is near the starting point, BFS can find it quickly.  For example, in a social network, if you’re looking for immediate friends, BFS will quickly identify them by exploring all first-degree connections before moving on to second-degree connections. 2. Chess engines finding win positions                                              |
 | **Guarantee**           | Not guaranteed to find shortest path or a solution if branches are infinite                 | Guaranteed to find a solution if one exists, and finds shortest path in unweighted graphs |
-| **Memory Usage**        | Generally less memory usage as it explores deeply                                           | More memory needed to track all nodes at current level                           |
+| **Memory Usage**        | Generally less memory usage as DFS only needs to keep track of nodes along the current path                                           | More memory needed to track all nodes at current level                           |
 
 
