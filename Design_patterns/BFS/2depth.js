@@ -6,7 +6,9 @@ class TreeNode {
   }
 }
 
-// Instead of returning as soon as we find a leaf node, we will keep traversing for all the levels, incrementing maximumDepth each time we complete a level.
+// Instead of returning as soon as we find a leaf node, we will keep traversing
+// for all the levels,
+// incrementing maximumDepth each time we complete a level.
 function findMaximumDepth(root) {
   if (!root) return 0;
 
@@ -24,16 +26,29 @@ function findMaximumDepth(root) {
       const currNode = queue.shift();
 
       //insert the children of current node in the queue
-      if (currNode.left !== null) {
+      if (currNode.left) {
         queue.push(currNode.left);
       }
-      if (currNode.right !== null) {
+      if (currNode.right) {
         queue.push(currNode.right);
       }
     }
   }
   return maximumTreeDepth;
 }
+
+// TC  - In the worst case (a completely unbalanced tree),
+// the recursion depth could go as deep as the height of the tree,
+// leading to O(h) space complexity, where h is the height of the tree. 
+
+// via recursion (DFS)
+var maxDepth = function (root) {
+  if (!root) return 0;
+  let leftSubHeight = maxDepth(root.left);
+  let rightSubHeight = maxDepth(root.right);
+  return Math.max(leftSubHeight, rightSubHeight) + 1;
+};
+// TC O(n)
 
 const root = new TreeNode(12);
 root.left = new TreeNode(7);
