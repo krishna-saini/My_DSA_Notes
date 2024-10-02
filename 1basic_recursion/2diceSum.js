@@ -14,6 +14,8 @@
  * Brute Force Approach
  */
 function countWaysToConstructSumFromDice(sum) {
+  // base case
+  // There's exactly one way to achieve a sum of 0, which is by doing nothing (i.e., no dice rolls).
   if (sum === 0) return 1;
   if (sum < 0) return 0;
 

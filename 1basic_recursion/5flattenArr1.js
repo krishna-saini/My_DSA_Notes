@@ -14,4 +14,4 @@ const flattenArray = (inputArray) => {
   return result;
 };
 
-console.log(flattenArray([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
+console.log(flattenArray([[[[1], [[[2, 5]]], [[[[[[[3]]]]]]]]]]));
