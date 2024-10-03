@@ -43,6 +43,8 @@ console.log(frequencyCounterInArray1([1,2,3,4,1,2,3]));  // TC =  O(n)
 
 
 /**
+ * time complexity - O(n)
+ * 
  * Space complexity
  * The SC will be defined by the number of unique characters
  * in the worst case, the number of unique chars = no. of chars of the string

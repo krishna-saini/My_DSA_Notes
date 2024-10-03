@@ -16,3 +16,7 @@ function sumtozero(arr) {
   }
   
   // console.log(sumtozero([-9, -3, -2, -1, 0, 1, 2, 3, 4]));
+  // TC - O(n)
+  // SC - O(1)
+  // two pointers were able to work here due to sorted array
+  // for unsorted array, use hashmap just like two sum and it will cost SC - O(n)

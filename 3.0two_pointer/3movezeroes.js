@@ -1,5 +1,6 @@
 /**
- * Move all Zeros to the end of the array
+ *Given an integer array nums, move all 0's to the end of it while 
+ * maintaining the relative order of the non-zero elements.
  */
 
 const bruteForce = (arr) => {
@@ -15,7 +16,7 @@ const bruteForce = (arr) => {
   }
   return newArr;
 };
-console.log(bruteForce[(1, 0, 2, 3, 0, 4, 0, 1)]);
+console.log("brute" , bruteForce([1, 0, 2, 3, 0, 4, 0, 1]));
 
 // TC: O(n)
 // SC: O(n)
@@ -48,7 +49,7 @@ const optimalSolution = (arr) => {
 
   return arr;
 };
-console.log(optimalSolution[(1, 0, 2, 3, 0, 4, 0, 1)]);
+console.log("optimised", optimalSolution([1, 0, 2, 3, 0, 4, 0, 1]));
 
 // TC: O(n)
-// SC: )(1)
+// SC: O(1)
