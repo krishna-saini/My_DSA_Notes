@@ -1,10 +1,15 @@
+/**
+ * Merge Sort is an elegant, recursive, and divide-and-conquer sorting algorithm.
+ *
+ * Splitting: The array is recursively divided in half until you have sub-arrays of size 1. These arrays are trivially sorted.
+ * Merging: Once you have sub-arrays of size 1, you start merging them back together in pairs. During the merge,
+ * you compare the smallest elements from both sub-arrays and build a new sorted array.
+ */
 const mergeSort = (arr, low = 0, high = arr.length - 1) => {
   // base condition
   if (low >= high) {
     return;
   }
-  // or same base condition
-  if (arr.length <= 1) return;
 
   const mid = low + Math.floor((high - low) / 2);
 
@@ -51,9 +56,10 @@ const merge = (arr, low, mid, high) => {
   }
 };
 
-console.log(mergeSort([2, 5, 1, 3, 9, 0, 8]));
-
+console.log('merge sort', mergeSort([2, 5, 1, 3, 9, 0, 8]));
 
 // TC - N*LogN - avg/best/worst
-// SC - O(n) because of temp array + ignoring recursive stack space
-
+// Every division step involves splitting the array,
+// which takes log n steps, and every merge step processes each element once,
+// taking O(n) time, resulting in an overall time complexity of O(n log n).
+// SC - O(n) because of temp array + ignoring recursive stack space(logn)

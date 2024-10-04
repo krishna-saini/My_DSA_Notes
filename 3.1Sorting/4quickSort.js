@@ -1,10 +1,16 @@
 const quickSort = (arr, low = 0, high = arr.length - 1) => {
   // base condition
-  if (low < high) {
-    const pivotIndex = partition(arr, low, high);
-    quickSort(arr, low, pivotIndex - 1);
-    quickSort(arr, pivotIndex + 1, high);
+  if (low >= high) {
+    return;
   }
+
+  const pivotIndex = partition(arr, low, high);
+  // Recursively sort the elements before and after the pivot
+  console.log("krishna", pivotIndex, arr)
+
+  quickSort(arr, low, pivotIndex - 1);
+  quickSort(arr, pivotIndex + 1, high);
+
   return arr;
 };
 
@@ -41,11 +47,16 @@ const partition = (arr, low, high) => {
   return j;
 };
 
-console.log('krishn a', quickSort([3, 1, 2], 0, 2));
-// console.log('partition', quickSort([17, 6, 2, 8, 3], 0, 4));
+// console.log('krishn a', quickSort([3, 1, -2]));
+console.log('partition', quickSort([17, 6, 2, 81, 3], 0, 4));
 
-
-// TC - NlogN - avg case 
-// SC O(1) ignoring recursive stack
+// TC - NlogN - avg case
+// SC O(1) ignoring recursive stack(O(logn))
 // Worst Case: O(n 2), which occurs when the pivot selection results in highly unbalanced
 // partitions (e.g., always picking the smallest or largest element as the pivot in a sorted array).
+// solution to above -  using a random pivot or median-of-three pivot selection
+//(choosing the middle element of the array) can help avoid poor partitioning and
+//improve performance in practical use cases.
+
+//  Quick Sort is more space-efficient (O(log n)) than Merge Sort (O(n))
+// because it doesn’t require additional arrays to merge.
