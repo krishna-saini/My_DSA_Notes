@@ -34,36 +34,38 @@ const findUnion = (arr1, arr2) => {
         // this is required to prevent duplicate entries
         union.push(arr1[i]);
       i++;
-    } else if (arr1[i] > arr2[j] || union[union.length - 1] !== arr2[j]) {
+      console.log('krishna1', i, j, union);
+    } else if (arr1[i] > arr2[j] && union[union.length - 1] !== arr2[j]) {
       union.push(arr2[j]);
       j++;
+      console.log('krishna2', i, j, union);
     } else {
       union.push(arr1[i]);
       i++;
       j++;
+      console.log('krishna3', i, j, union);
     }
   }
-  console.log("krishna2", union, i, arr1.length);
+
   // Add remaining elements from arr1, if any
-  while (i < arr1.length && union[i] !== union[union.length - 1]) {
+  while (i < arr1.length && arr1[i] !== union[union.length - 1]) {
     union.push(arr1[i]);
     i++;
   }
   // Add remaining elements from arr2, if any
-  while (j < arr2.length && union[j] !== union[union.length - 1]) {
+  while (j < arr2.length && arr2[j] !== union[union.length - 1]) {
     union.push(arr2[j]);
     j++;
   }
 
   return union;
-  console.log("krishna", union, i, arr1.length);
 };
 
-const arr1 = [1, 3, 5, 7];
-const arr2 = [2, 3, 4, 4];
+const arr1 = [1, 1, 3, 5, 7];
+const arr2 = [2, 3, 4, 4, 7, 8, 9];
 const resultUnion = findUnion(arr1, arr2);
 
-console.log(resultUnion);
+console.log('union is', resultUnion);
 
 // TC - O(n)
 // SC O(n+m)

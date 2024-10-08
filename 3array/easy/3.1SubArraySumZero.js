@@ -74,6 +74,56 @@ const checkIfSubArrayWithSumZero2 = (array) => {
   return false;
 };
 
-console.log(checkIfSubArrayWithSumZero2([1, 2, -3, 3]));  
+console.log(checkIfSubArrayWithSumZero2([1, 2, 0, 3]));
 // TC O(n)
 // SC - O(n)
+
+// extend it to find maxLenghtZeroSumSubArray
+// keep tracking the maxLength and start index of those subarray of which sum = 0
+// take help of hasmap which is storing prefix sum as key and indices as values
+
+function maxLengthZeroSumSubarray(arr) {
+  // Map to store the prefix sums and their first occurrence index
+  const prefixSumMap = new Map();
+  let maxLength = 0;
+  let startIndex = -1;
+  let prefixSum = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    prefixSum += arr[i];
+
+    // check if prefix sum is 0
+    // to handle scenario where first element is 0 itself [0,1,2,3]
+    // or if the zeroSumSubArray starts from 0th index [1,2, -3]
+    if (prefixSum === 0) {
+      maxLength = i + 1;
+      startIndex = 0; // as in this case, prefixsum will only be 0 if subarray is starting from 0th index
+    }
+
+    // If the prefix sum has been seen before, update the max length subarray if required
+    if (prefixSumMap.has(prefixSum)) {
+      const prevIndex = prefixSumMap.get(prefixSum);
+      const length = i - prevIndex;
+      if (length > maxLength) {
+        maxLength = length;
+        startIndex = prevIndex + 1;
+      }
+    } else {
+      // Store the first occurrence of this prefix sum
+      prefixSumMap.set(prefixSum, i);
+    }
+  }
+
+  // If no subarray with sum 0 is found, return an empty array
+  if (maxLength === 0) {
+    return [];
+  }
+
+  // Return the longest subarray with sum 0
+  return arr.slice(startIndex, startIndex + maxLength);
+}
+
+// Example usage:
+const arr = [1, 2, -3, 0];
+const result2 = maxLengthZeroSumSubarray(arr);
+console.log('Longest subarray with sum 0:', result2);

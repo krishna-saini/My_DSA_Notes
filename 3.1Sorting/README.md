@@ -8,7 +8,7 @@
 
 mergeSort(arr, low=0, high=arr.length-1){
 // base condition
-if(low === high) return ;
+if(low >= high) return ;
 
 mid = (low+high)/2
 // left half
