@@ -63,7 +63,7 @@ console.log(longestSubArrOfGivenSumOptimal([1, 2, 3, 4, 2, -1, 1], 6));
 // TC - O(n)  // if you use object in place of map, 
 // the TC may increase as order of elements in object is not 
 // predictable/maintained.
-// SC - we may use whole length of array to store the sum, = O(1)
+// SC - we may use whole length of array to store the sum, = O(n)
 
 // can we futher optimise SC
 // Yes if we have only positive and/or zeroes in array, then

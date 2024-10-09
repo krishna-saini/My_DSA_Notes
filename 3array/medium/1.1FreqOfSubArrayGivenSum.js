@@ -34,10 +34,10 @@ So, in order to avoid this situation we need to set the value of 0 as 1 on the m
 
     // storing prefixsum with their frequency
     map.set(sum, (map.get(sum) || 0) + 1);
-
   }
   return count;
 };
 
 console.log(optimal([1, 1, 1], 2));
-// console.log(optimal([2, -1, 6], 2));
+console.log(optimal([4, 3, -3, 1, 1, 1], 3));
+console.log(optimal([2, -1, 6], 2));
