@@ -6,7 +6,7 @@ subarray
  */
 
 // Brute force
-// O(n^2) O(n)
+// O(n^2) O(1)
 
 // using cumilitive sum (prefix sum)
 // create an array of prefix sum of given array
@@ -14,53 +14,60 @@ subarray
 // sum of el from i to j = sum(i, j) = prefixSum[j] - prefixSum[i-1]
 // max sum(i,j)  = max (prefixSum[j] - prefixSUm[i-1])
 // it means find the maximum difference between two elements of prefix sum
+// it means track maxPrefixSum and minPrfixSum.
+// if(minPrefixSum <0) , it will further maximise the sum(i,j), hence
+// update minPrefixSum if it is <0
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function (nums) {
-  // Initialize the prefix sum array and the sum variable
-  const prefix = [];
-  let sum = 0;
+var maxSubArrayUsingPrefixSum = function (nums) {
+  let prefixSum = 0;
+  let minPrefixSum = 0; // keep it at 0 as we will update it if prefixSum goes below 0
+  let maxPrefixSum = -Infinity;
+  let minPrefixSumIndex = -1;
+  // Variables to keep track of the starting and ending indices of the max subarray
+  let start = 0;
+  let end = 0;
 
-  // Calculate prefix sum array
+  /**
+   * The minimum prefix sum (minPrefixSum) is the smallest sum of any subarray that
+   * starts from the beginning and ends somewhere before the current index.
+   */
+
   for (let i = 0; i < nums.length; i++) {
-    sum += nums[i];
-    prefix.push(sum);
-  }
+    prefixSum += nums[i]; // track prefix sum upto the ith index
 
-  // Initialize variables for min prefix sum and max subarray sum
-  let minPrefixSum = 0;
-  let maxSubArraySum = -Infinity;
+    // track maxPrefix sum
+    // minPrefix sum keep track of min prefix sum encountered so far till ith index
+    // followup question -
+    // return that subarray which has max sum and is of max length is multiple such sub arr found
 
-  // Variables to keep track of the maximum subarray sum and its start and end indices
-  let minPrefixSumIndex = -1; // Index corresponding to the minimum prefix sum
-  let start = 0; // Starting index of the maximum subarray
-  let end = 0; // Ending index of the maximum subarray
-
-  // Find max subarray sum using prefix sum array
-  for (let i = 0; i < prefix.length; i++) {
-    // Calculate the potential max subarray sum ending at index i
-    // maxSubArraySum = Math.max(maxSubArraySum, prefix[i] - minPrefixSum);
-    if (prefix[i] - minPrefixSum > maxSubArraySum) {
-      maxSubArraySum = prefix[i] - minPrefixSum;
+    // Check if we found a new maximum subarray sum or
+    // a subarray of the same sum but with longer length
+    if (
+      prefixSum - minPrefixSum > maxPrefixSum ||
+      (prefixSum - minPrefixSum === maxPrefixSum &&
+        i - minPrefixSumIndex + 1 > end - start)
+    ) {
+      maxPrefixSum = prefixSum - minPrefixSum;
       start = minPrefixSumIndex + 1;
       end = i;
     }
 
-    // Update the min prefix sum encountered so far
-    // minPrefixSum = Math.min(minPrefixSum, prefix[i]);
-    if (prefix[i] < minPrefixSum) {
-      minPrefixSum = prefix[i];
+    // track minprefixSum
+    if (prefixSum < minPrefixSum) {
+      minPrefixSum = prefixSum;
       minPrefixSumIndex = i;
     }
   }
 
-  // return maxSubArraySum;
-  return nums.slice(start, end + 1);
+  const maxSubArr = nums.slice(start, end + 1);
+  return { maxPrefixSum, maxSubArr };
 };
 
-console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Output: 6
+// console.log(maxSubArrayUsingPrefixSum([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Output: 6
+console.log('2', maxSubArrayUsingPrefixSum([1, 2, 3, -6, 6])); // Output: 6
 
 // TC =  O(n) = SC
 
@@ -71,43 +78,45 @@ console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Output: 6
  subarray as a part of the answer if its sum is less than 0.
 2.  A subarray with a sum less than 0 will always reduce our answer and so this type of
 subarray cannot be a part of the subarray with maximum sum.
+
+
+The core idea of Kadane's algorithm is to decide at each element of the array whether to:
+
+Include the element in the existing subarray or
+Start a new subarray with the current element as its sole member.
+This decision is based on whether adding the current element increases 
+the subarray sum or if starting fresh with the current element gives a better result.
+
+
+The key insight of Kadane's algorithm is to iterate through the array while keeping track of two things:
+
+The maximum sum of any subarray ending at the current position.
+The maximum sum encountered so far.
 */
 
-const maxSubArrSum = (arr) => {
-  let maxSum = -Infinity;
-  let sum = 0;
-  let start;
-  let ansStart = -1;
-  let ansEnd = -1;
-  if (nums.length === 1) return nums[0];
+const maxSubArrSum = (nums) => {
+  let maxSubArrSum = -Infinity;
+  let maxPrefixSum = 0;
+
+  if (nums.length === 0) return -1; // check with interviewer about this
 
   for (let i = 0; i < arr.length; i++) {
-    sum += arr[i];
-    if (sum === 0) {
-      start = i;
-    }
-    // check is sum exceeds maxSUm
-    if (sum > maxSum) {
-      maxSum = sum;
-      //the subarray always starts at the particular index where the sum variable is equal to 0
-      ansStart = start;
-      //at the ending index, the sum always crosses the previous maximum sum
-      ansEnd = i;
-    }
-    if (sum < 0) {
-      sum = 0;
-    }
+    // The maximum sum of any subarray ending at the current position.
+    maxPrefixSum = Math.max(arr[i], maxPrefixSum + arr[i]);
+
+    //The maximum sum encountered so far.
+    maxSubArrSum = Math.max(maxSubArrSum, maxPrefixSum);
 
     // solution for 1st follow up
-    //if (maxi < 0) maxi = 0;
+    //if (maxSubArrSum < 0) maxSubArrSum = 0;
   }
-  return maxSum;
+  return maxSubArrSum;
 };
 
 const arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
 
 const maxSum = maxSubArrSum(arr);
-console.log('The maximum subarray sum is: ' + maxSum);
+console.log('The maximum subarray sum is via kadae: ' + maxSum);
 
 // Follow up question
 // 1. Take empty subarray into consideration too , in that case we have to compare with 0
