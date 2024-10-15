@@ -1,30 +1,26 @@
-function binarySearch(arr, x) {
+function binarySearch(arr, target) {
   let low = 0;
   let high = arr.length - 1;
-  let pos;
+  let result = -1;
 
   while (low <= high) {
     let mid = low + Math.floor((high - low) / 2); // this is done to avoid overflowing that may occur if we do mid = high+ low/2
 
-    //check at mid
-    if (arr[mid] === x) {
-      return mid;
-    }
-
-    //if element is < mid value
-    if (x < arr[mid]) {
-      high = mid - 1;
-    }
-
-    //if element > mid value
-    else {
-      low = mid + 1;
+    // Check if the target is found at the mid index
+    if (arr[mid] === target) {
+      result = mid; // Update the result with the current position
+      high = mid - 1; // Continue searching to the left for the first occurrence
+    } else if (target < arr[mid]) {
+      high = mid - 1; // Search in the left half
+    } else {
+      low = mid + 1; // Search in the right half
     }
   }
-  return -1;
+  return result;
 }
 
-console.log(binarySearch([1, 2, 3, 4], 2));
+console.log(binarySearch([1, 2, 2, 3, 4], 2));
+console.log(binarySearch([-2], -2));
 /**
  * Time complexity
  *

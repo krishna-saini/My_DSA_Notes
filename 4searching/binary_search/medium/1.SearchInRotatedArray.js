@@ -44,7 +44,7 @@ To efficiently search for the target element, you can apply the following strate
  * @param {number} target
  * @return {number}
  */
-var search = function (arr, target) {
+const search = function (arr, target) {
   let left = 0;
   let right = arr.length - 1;
   while (left <= right) {
@@ -56,7 +56,7 @@ var search = function (arr, target) {
     if (arr[left] <= arr[mid]) {
       // left half is sorted
       // check if target exist
-      if (arr[left] <= target <= arr[mid]) {
+      if (arr[left] <= target && target <= arr[mid]) {
         // discard right half
         right = mid - 1;
       } else {
@@ -66,7 +66,7 @@ var search = function (arr, target) {
     } else {
       // right half is sorted
       // check if target exist
-      if (arr[mid] <= target <= arr[right]) {
+      if (arr[mid] <= target && target <= arr[right]) {
         // discard left half
         left = mid + 1;
       } else {
@@ -77,4 +77,55 @@ var search = function (arr, target) {
   }
   return -1;
 };
-console.log(search([1, 3], 1));
+console.log(search([1, 2, 3, 4, 5], 3));
+
+// follow up question , try to solve it for repeated elements search([1,3,3,3, 3], 3
+// follow up
+
+const searchRotatedArr = function (arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  let result = -1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+
+    if (arr[mid] === target) {
+      result = mid;
+      right = mid - 1; // Continue searching in the left half for the first occurrence
+    } else if (arr[left] === arr[mid] && arr[mid] === arr[right]) {
+      //When the elements at left, mid, and right are the same,
+      // Increment left and decrement right to skip duplicates
+
+      left++;
+      right--;
+    } else if (arr[left] <= arr[mid]) {
+      // left half is sorted
+      // check if target exist
+      if (arr[left] <= target && target <= arr[mid]) {
+        // discard right half
+        right = mid - 1;
+      } else {
+        // discard left half
+        left = mid + 1;
+      }
+    } else {
+      // right half is sorted
+      // check if target exist
+      if (arr[mid] <= target && target <= arr[right]) {
+        // discard left half
+        left = mid + 1;
+      } else {
+        // discard right half
+        right = mid - 1;
+      }
+    }
+  }
+  return result;
+};
+
+console.log('modified', searchRotatedArr([1, 3, 3, 3], 3));
+console.log('modified', searchRotatedArr([1, 0, 1, 1, 1], 0));
+console.log(
+  'modified',
+  searchRotatedArr([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1], 2)
+);

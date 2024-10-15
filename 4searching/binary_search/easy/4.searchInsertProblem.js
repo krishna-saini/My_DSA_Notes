@@ -49,15 +49,13 @@ console.log('optimal force', searchInsertOptimal([1, 2, 4, 5, 6, 7], 8));
 const searchInsertOptimalModified = (nums, target) => {
   let left = 0;
   let right = nums.length - 1;
+  let result = -1; // To store the index of the first occurrence
 
   while (left <= right) {
     let mid = left + Math.floor((right - left) / 2);
     if (nums[mid] === target) {
-      if (nums[mid - 1] !== target) {
-        return mid;
-      } else {
-        right = mid - 1;
-      }
+      result = mid; // Update the result with the current position
+      right = mid - 1; // Continue searching to the left for the first occurrence
     } else if (nums[mid] < target) {
       left = mid + 1;
     } else {
@@ -65,7 +63,7 @@ const searchInsertOptimalModified = (nums, target) => {
     }
   }
   // If the target is not found, return the insertion index
-  return left; // Insertion index
+  return result; // Return the index of the first occurrence or -1 if not found
 };
 
 console.log(

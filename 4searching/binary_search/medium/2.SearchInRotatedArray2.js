@@ -4,6 +4,10 @@ https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
 array may contain duplicates
 
 return true if target exist else false
+
+You must decrease the overall operation steps as much as possible.
+
+
 */
 
 /*
@@ -17,7 +21,7 @@ is when arr[low]===arr[mid]===arr[high]
 In that case, eliminate them to decrease seach space
 */
 
-var search = function (arr, target) {
+const search = function (arr, target) {
   let left = 0;
   let right = arr.length - 1;
   while (left <= right) {
@@ -57,4 +61,4 @@ var search = function (arr, target) {
   return false;
 };
 
-console.log(search([1, 3], 1));
+console.log(search([1,3,3,3, 3], 3));
