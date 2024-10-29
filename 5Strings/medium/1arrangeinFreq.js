@@ -15,7 +15,6 @@ const countFreq = (str) => {
       map.set(char, 1);
     }
   }
-  console.log('map', map);
   return map;
 };
 
@@ -24,9 +23,8 @@ function frequencySort(s) {
 
   // Step 2: Create an array of unique characters with their frequencies
   const charArr = Array.from(charFreq.entries());
-  console.log(charArr);
   // Step 3: Sort the array based on the frequency of characters in decreasing order
-  charArr.sort((a, b) => b[1] - a[1]);
+  charArr.sort(([key1, value1], [key2, value2]) => value2 - value1);
 
   // Step 4: Construct the sorted string
   let sortedString = '';
