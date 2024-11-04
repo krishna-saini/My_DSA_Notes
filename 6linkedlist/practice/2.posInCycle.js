@@ -55,6 +55,12 @@ const findPos = (head) => {
   if (slow !== fast) {
     return null;
   }
+  /**
+   * The mathematical property that makes this work is that 
+   * when the pointers meet inside the cycle, 
+   * the distance from head to cycle start equals the distance 
+   * from meeting point to cycle start when moving at the same speed.
+   */
 
   // resetting the slow to head and move both will same pace
   slow = head;

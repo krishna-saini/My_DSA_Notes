@@ -22,7 +22,7 @@ var getIntersectionNode1 = function (headA, headB) {
 
   while (current) {
     if (visitedNodes.has(current)) {
-        break;
+        break; // cycle detected
       }
     visitedNodes.add(current);
     current = current.next;
@@ -53,6 +53,9 @@ var getIntersectionNode1 = function (headA, headB) {
 /**
  * do it in SC O(1) using two pointer
  * Intuition -
+ * 1. assume that we have merged both LL (A&B) in two ways A+B & B+A
+ * 2. now both have equal length,and if there is any intersection, it will be at equal distance from starting 
+ * 
  * let both pointer traverse both the LL so that ultimately they will collide at the interstion point
  * so once one pointer traverse one LL, 
  * Resetting the pointer to the head of the other list allows both pointers to traverse through both lists, increasing the chances of finding the intersection.
