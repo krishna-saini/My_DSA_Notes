@@ -2,12 +2,20 @@
 /**
  * Definition for singly-linked list.
  */
+const printList = (head) => {
+  const values = [];
+  while (head) {
+    values.push(head.val);
+    head = head.next;
+  }
+  return values.join(' -> ');
+};
 
 class ListNode {
-    constructor(val, next) {
-        this.val = val === undefined ? 0 : val;
-        this.next = next === undefined ? null : next;
-    }
+  constructor(val, next) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
 }
 /**
  * @param {ListNode} head
@@ -15,6 +23,7 @@ class ListNode {
  * @return {ListNode}
  */
 var removeElements = function (head, val) {
+  console.log('start: ', printList(head));
   if (!head) return null;
 
   let prevNode = null;
@@ -25,6 +34,8 @@ var removeElements = function (head, val) {
     if (head.val === val) {
       head = head.next;
       current = head;
+      console.log('after head is matching: ', printList(head));
+
       continue;
     }
 
@@ -32,6 +43,7 @@ var removeElements = function (head, val) {
 
     if (current.val === val) {
       prevNode.next = nextNode;
+      console.log('after any node is matching: ', printList(head));
     } else {
       prevNode = current;
     }
@@ -46,8 +58,10 @@ var removeElements = function (head, val) {
 
 let head = new ListNode(3);
 head.next = new ListNode(3);
-head.next.next = new ListNode(3);
+head.next.next = new ListNode(1);
 head.next.next.next = new ListNode(3);
 head.next.next.next.next = new ListNode(3);
+head.next.next.next.next.next = new ListNode(4);
+head.next.next.next.next.next.next = new ListNode(5);
 
 console.log('krishna removing nodes', removeElements(head, 3));

@@ -1,80 +1,120 @@
-/**
- * https://takeuforward.org/data-structure/check-if-given-linked-list-is-plaindrome/
- *
- * Brute force
- * take each value of the LL in another DS say array
- * check if it is palindromic array
- * SC - O(n), TC - O(1)
- */
-
-import { reverseList } from './0.reverseLL';
+class ListNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
 
 /**
- * Optimised approach intuition
- * Reverse the 2nd half of LL and compare each node of bothe first half and second half
+ * Reverse a linked list starting from the given head node.
+ * @param {ListNode} head
+ * @return {ListNode} New head of the reversed list
  */
+const reverseList = function (head) {
+  let previous = null;
+  let nextNode = null;
+  let currentNode = head;
+
+  // Traverse and reverse the linked list
+  while (currentNode) {
+    nextNode = currentNode.next;      // Store the next node
+    currentNode.next = previous;      // Reverse the current node's pointer
+    previous = currentNode;           // Move previous pointer forward
+    currentNode = nextNode;           // Move to the next node in the original list
+  }
+  return previous; // Return new head of the reversed list
+};
 
 /**
- * Pseduo code
- * 1. The first step is dividing the first and second half of the linked list by recognizing the middle node
- * 2. find the middle of the LL
- * can be easily found by using tortoise and Hare algo where one pointer moves by 1 step
- * while 2nd pointer moves by two steps in a single loop
- * Continue this until the ‘fast’ pointer reaches the end of the list or is the second last on the list.
- * The ‘slow’ pointer will now be in the middle of the linked list.
- *
- * 3. now reverse the 2nd half of LL
- * const newHead = reverseLL(slow.next)
- *
- * this will return reversed 2nd half, though still the last element of reversed LL is connected with first half
- *
- * 4. pt1 points to head of LL and pt2 points to newHead of reversed LL
- *
- * 5. loop while(pt1 !== slow || pt2 !== null) & compare each node value of both LL with each other
- *
- * 6. after comparison, reverse the 2nd half of LL to original state
- * reverseLL(newHead)
- *
+ * Helper to print linked list
  */
+const printList = (head) => {
+  const values = [];
+  while (head) {
+    values.push(head.val);
+    head = head.next;
+  }
+  console.log(values.join(" -> "));
+};
 
+/**
+ * Check if a linked list is a palindrome.
+ * @param {ListNode} head
+ * @return {boolean} Whether the list is a palindrome
+ */
 const isPalindrome = (head) => {
-  // Find the middle of the linked list
-  let current = head;
+  console.log("Original list:");
+  printList(head);
+
+  // Step 1: Find the middle of the linked list using Tortoise and Hare approach
   let slowPointer = head;
   let fastPointer = head;
+
+  /**
+   *  Condition to find the middle:
+  // - fastPointer moves twice as fast as slowPointer.
+  // - fastPointer should move forward while fastPointer.next and fastPointer.next.next are not null.
+  //   This ensures fastPointer does not go out of bounds in an odd-length list.
+   */
   while (fastPointer && fastPointer.next && fastPointer.next.next) {
     slowPointer = slowPointer.next;
-    fastPointer = fastPointer.next.next; // Tortoise and Hare algorithm
+    fastPointer = fastPointer.next.next;
   }
   const middleNode = slowPointer;
 
-  // Reverse the second half of the linked list after the middle
-  const reversedSecondHalfHead = reverseList(middleNode.next);
+  console.log("Middle of the list found at:", middleNode.val);
 
-  // Two pointers to check
+  // Step 2: Reverse the second half of the list starting from middleNode.next
+  const reversedSecondHalfHead = reverseList(middleNode.next);
+  middleNode.next = null; // Disconnect first half from the reversed second half
+
+  console.log("First half after separation:");
+  printList(head);
+
+  console.log("Reversed second half:");
+  printList(reversedSecondHalfHead);
+
+  // Step 3: Initialize two pointers to compare both halves of the list
   let firstHalfPointer = head;
   let secondHalfPointer = reversedSecondHalfHead;
 
-  while (firstHalfPointer !== middleNode || secondHalfPointer !== null) {
-    if (firstHalfPointer !== secondHalfPointer) {
-      reverseList(reversedSecondHalfHead);
+   // Condition for comparing both halves:
+  // - Continue while secondHalfPointer is not null, as it will be shorter than the first half.
+  // - Each pointer checks corresponding nodes in the two halves for equality.
+  while (secondHalfPointer) {
+    if (firstHalfPointer.val !== secondHalfPointer.val) {
+      // Restore the second half before returning false
+      middleNode.next = reverseList(reversedSecondHalfHead); // Reattach after restoring
+      console.log("Restored list after failure:");
+      printList(head);
       return false;
     }
     firstHalfPointer = firstHalfPointer.next;
     secondHalfPointer = secondHalfPointer.next;
   }
 
-  // Restore the reversed second half (optional)
-  reverseList(reversedSecondHalfHead);
-  return true;
+  // Step 4: Restore the second half to its original order and reconnect
+  middleNode.next = reverseList(reversedSecondHalfHead); // Reattach restored list
+
+  console.log("Restored list after palindrome check:");
+  printList(head);
+
+  return true; // All nodes matched, indicating a palindrome
 };
 
-let head = new ListNode(1);
-head.next = new ListNode(1);
-head.next.next = new ListNode(2);
-head.next.next.next = new ListNode(1);
-// head.next.next.next = new ListNode(6);
-// head.next.next.next = new ListNode(4);
-// head.next.next.next.next = new ListNode(7);
+// Example Usage
+// let head = new ListNode(1);
+// head.next = new ListNode(2);
+// head.next.next = new ListNode(3);
+// head.next.next.next = new ListNode(1);
 
-console.log('krishng nodes 2', isPalindrome(head));
+// console.log("Is palindrome?", isPalindrome(head)); // Output: true
+
+// Example Usage
+let head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(2);
+head.next.next.next.next = new ListNode(1);
+
+console.log("Is palindrome?", isPalindrome(head)); // Output: true
