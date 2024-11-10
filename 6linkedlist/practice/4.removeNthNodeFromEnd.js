@@ -11,6 +11,9 @@
  *
  * nth from beginning = length - n th from the end
  * nth from end = length - n th from beginning
+ * 
+ * 
+ * Assumption - no cycle present
  */
 
 class ListNode {
@@ -31,6 +34,8 @@ const getLengthofLL = (head) => {
   return counter;
 };
 const removeNodeFromEnd = (head, n) => {
+  if (n <= 0) return head; // Handle invalid n by returning the list unchanged
+
   const length = getLengthofLL(head);
 
   const indexToRemove = length - n;
@@ -63,18 +68,27 @@ console.log('krishna 1', removeNodeFromEnd(head, 2)); // O(L)+O(L)
 /**
  * can reduce one looping of LL
  * Intuition - use two pointer both pointing to head
- * move fast pointer `n` steps ahead
+ * move fast pointer `n` steps ahead of slow
  * 
- * then move both together 
- * in this way, first pointer will be once place behind the node to be removed
+ * then move both together unless fast.next exists(means it reaches to length of LL)
+ * in this way, slow pointer will be once place behind the node to be removed
  *
  */
 
+/**
+ * if n = 2 , remove 2nd node from end i.e. 4,  length of LL = 5(1->2->3->4->5->null)
+ * | slow ->1 , fast -> 3 (2 step ahead of slow)
+ * now remaining lenght of LL after fast = 5-3 = 2
+ * hence move slow also by 2, slow will reach 3, one step behind the node to be removed
+ */
+
 const removeNodeFromEnd2 = (head, n) => {
+  if (n <= 0) return head; // Handle invalid n by returning the list unchanged
+
   let slow = head;
   let fast = head;
 
-  // move fast n steps ahead
+  // move fast n steps ahead of slow
   for (let i = 0; i < n; i++) {
     fast = fast.next;
   }
