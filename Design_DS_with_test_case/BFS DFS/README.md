@@ -8,7 +8,7 @@
 - a leaf/leaves is a node that has no children
 - The height of a node is the length of the longest downward path to a leaf from that node.
 - The depth of a node is the length of the path to its root (i.e., its root path).
-- Degree of a node is the number of childer of the node
+- Degree of a node is the number of childen of the node
 - Degree of tree - maximum degree of a node in the tree.
 - Width - number of nodes at a level
 - Size of a tree - Number of nodes in the tree.

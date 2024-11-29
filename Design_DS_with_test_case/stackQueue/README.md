@@ -19,6 +19,7 @@
 - call stack of JS engine
 - Undo/Redo Functionality - undo the latest action which is at top of stack. it doesnt go a hundred actions back. you have to step though it constantly.
 - Routing(the history object) in React/other framework
+- can be used to track Next/previous greater/smaller element in array (via monotonic stack)
 
 ### implementation 
 - A dynamic array is sufficient to implement a stack structure.(push and pop / unshift and shift)

@@ -37,11 +37,11 @@ var preorderIterativeDFS = function (root) {
     let currentNode = stack.pop();
     result.push(currentNode.value);
     /**
-Push right child before left in stack
-since stack is LIFO
-this ensures that left which should be processed first in preorder traversal
-is visited before the right child
- */
+    Push right child before left in stack
+    since stack is LIFO
+    this ensures that left which should be processed first in preorder traversal
+    is visited before the right child
+    */
     if (currentNode.right) {
       stack.push(currentNode.right);
     }
