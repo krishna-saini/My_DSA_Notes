@@ -44,3 +44,50 @@ var containsDuplicate = function (nums) {
     return false; // No duplicates found
 };
   
+
+/**
+ * Follow up -
+ * How would you solve this if the numbers were coming in as a stream and you needed to report if a duplicate was found at any point?
+ * 
+ * or
+ * 
+ * Design a data structure that can efficiently insert elements and check for duplicates in O(1) time for both operations. 
+ * for this requirment, we need data in stream form
+ */
+
+class DuplicateDetector {
+    constructor() {
+        this.seen = new Set();
+        this.result = [];
+    }
+
+    /**
+     * @param {number} num
+     * @return {boolean} - true if this number is a duplicate, false otherwise
+     */
+    addNumber(num) {
+        if (this.seen.has(num)) {
+            return true; // Duplicate found
+        }
+        this.seen.add(num);
+        this.result.push(num)
+        return false; // Not a duplicate
+    }
+
+    /**
+     * @return {number} - number of unique elements seen so far
+     */
+    getUniqueCount() {
+        return this.seen.size;
+    }
+}
+
+// Example usage:
+const detector = new DuplicateDetector();
+
+console.log(detector.addNumber(1)); // false (not a duplicate)
+console.log(detector.addNumber(2)); // false
+console.log(detector.addNumber(3)); // false
+console.log(detector.addNumber(2)); // true (duplicate found)
+console.log(detector.addNumber(4)); // false
+console.log(detector.getUniqueCount()); // 4
