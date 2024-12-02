@@ -15,11 +15,19 @@
 /**
  * sort the array and check if next value is same as current value
  * TC - O(nlogn) SC. - O(1)
+ * 
+ * This solution is particularly useful when:
+   1. The input array is very large & Available memory is limited as we dont need a DS that grows with input arry
+   2. Modifying the original array is acceptable.
+   3. it can be slow for smaller array
  */
 
 /**
  * Keep track of frequency of each element using Map
  * TC - O(n) SC - O(n)
+ * 
+ * 1. it is helpful if array is not very large
+ * 2. does not mofify original array
  */
 
 var containsDuplicate = function (nums) {
