@@ -1,4 +1,4 @@
-var maximumSubarraySum = function (nums, k) {
+const maximumSubarraySum = function (nums, k) {
     // Edge case: if the array length is less than k, we can't form a valid subarray
     if (nums.length < k) {
       throw new Error("nums.length < k");
@@ -46,3 +46,35 @@ console.log("Maximum subarray sum:", maximumSubarraySum(nums, k));
 
 // Space Complexity: O(1)
 // - We only use a constant amount of extra space (maxSum and newSum)
+
+
+/**
+ * another better approach
+ */
+const maximumSubarraySum2 = function (nums, k) {
+    if (nums.length < k) {
+      throw new Error("nums.length< k");
+    }
+    let start = 0;
+    let windowSum = 0;
+    let maxSum = -Infinity; // or other appropriate initial value
+  
+    for (let end = 0; i < nums.length; end++) {
+      windowSum += nums[i];
+      // When we hit the window size, we start sliding
+      // it means as soon as you get sum of 3 elements, window size is hit
+      // it can be a set also 
+      // if (i >= k - 1) {
+      if(end-start+1 === k){
+        maxSum = Math.max(maxSum, windowSum);
+        // update the new window windowSum
+        windowSum -= nums[start];
+        start++;
+      }
+    }
+    return maxSum;
+  };
+  
+  
+  console.log("krishna", maximumSubarraySum2(nums, k)); // O(n) TC
+  
