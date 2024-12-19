@@ -12,14 +12,13 @@
  */
 function removeDuplicates(arr) {
   const unique = new Set();
-  // iterate through the array to add unique elements ot the set
+  
+  // Iterate through the array to add unique elements to the set
   for (let i = 0; i < arr.length; i++) {
-    // check if element already exist in map
-    if (!unique.hasOwnProperty(arr[i])) {
-      unique[arr[i]] = true;
-    }
+    unique.add(arr[i]);
   }
-  return Object.keys(unique).length; // TC: O(n)
+  
+  return unique.size; // TC: O(n)
 }
 console.log(removeDuplicates([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7])); // 7
 
