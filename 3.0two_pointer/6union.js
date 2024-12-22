@@ -4,6 +4,10 @@
  *
  * Here the two given array are sorted and we need to find their union
  * the final arry should be sorted too
+ * 
+ * n = 5, nums1[ ] = {2, 2, 3, 4, 5}
+ * m = 5, nums2[ ] = {1, 1, 2, 3, 4}
+Output: 1 2 3 4 5
  */
 
 /**
