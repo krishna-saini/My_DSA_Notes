@@ -7,7 +7,7 @@ in the array.
 // https://takeuforward.org/data-structure/leaders-in-an-array/
 
 // Brute force
-// in such problems, keep a flat which is true in starting
+// in such problems, keep a flag which is true in starting
 // make it false if not following condition
 // check if it is still true at the end
 

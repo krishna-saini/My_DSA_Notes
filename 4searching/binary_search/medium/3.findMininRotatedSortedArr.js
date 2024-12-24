@@ -1,6 +1,10 @@
 /*
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
 
+[3 4 5 1 2]
+[4 5 1 2 3]
+[5 1 2 3 4]
+[1 2 3 4 5]
 Though the array is rotated, we can clearly notice that for every index,
 one of the 2 halves will always be sorted. In the above example,
 the right half of the index mid is sorted.

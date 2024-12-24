@@ -18,12 +18,10 @@ Return the single element that appears only once.
 // if 0th element is the ans , arr[0]!==arr[1]
 // if last el is the ans, arr[n-1] !=== arr[n-2]
 
-
 // Use XOR - as each element appear twice except one
 // ans = 0 and then XOR each element
 // a^a = 0 & 0^b = b
 // TC O(n)
-
 
 // Using Binary search
 // handle above edge case
@@ -44,39 +42,45 @@ How to check if we are in right half -
  * @param {number[]} nums
  * @return {number}
  */
-var singleNonDuplicate = function(nums) {
+var singleNonDuplicate = function (nums) {
     // handle edge cases
-    if(nums.length===1){
-        return nums[0]
+    if (nums.length === 1) {
+      return nums[0];
     }
     const n = nums.length;
-    if(nums[0]!==nums[1]) return nums[0];
-    if(nums[n-1] !== nums[n-2]) return nums[n-1];
-
+    if (nums[0] !== nums[1]) return nums[0];
+    if (nums[n - 1] !== nums[n - 2]) return nums[n - 1];
+  
     let left = 0;
-    let right = n-1;
-    while(left<=right){
-        const mid = left + Math.floor((right-left)/2);
-        // check id mid is ans
-        if(nums[mid] !== nums[mid-1] && nums[mid]!==nums[mid+1]){
-            return nums[mid];
-        }
-
-        // identify left half, 
-        //(even,odd) & even===odd
-        if(mid%2===0 && nums[mid]===nums[mid+1] || mid%2===1 && nums[mid]===nums[mid-1]){
-// eliminate left half as ans is in right side
-left = mid+1
-        }
-        //identify right half
-        // (odd,even)
-        if(mid%2===0 && nums[mid]===nums[mid-1] || mid%2===1 && nums[mid]===nums[mid+1]){
-            // elimimate right hald
-            right = mid -1;
-        }
+    let right = n - 1;
+    while (left <= right) {
+      const mid = left + Math.floor((right - left) / 2);
+      // check id mid is ans
+      if (nums[mid] !== nums[mid - 1] && nums[mid] !== nums[mid + 1]) {
+        return nums[mid];
+      }
+  
+      // identify left half,
+      //(even,odd) & even===odd
+      if (
+        (mid % 2 === 0 && nums[mid] === nums[mid + 1]) ||
+        (mid % 2 === 1 && nums[mid] === nums[mid - 1])
+      ) {
+        // eliminate left half as ans is in right side
+        left = mid + 1;
+      }
+      //identify right half
+      // (odd,even)
+      if (
+        (mid % 2 === 0 && nums[mid] === nums[mid - 1]) ||
+        (mid % 2 === 1 && nums[mid] === nums[mid + 1])
+      ) {
+        // elimimate right hald
+        right = mid - 1;
+      }
     }
-    
 };
 
 const arr = [1, 1, 2, 3, 3, 4, 4, 8, 8];
 console.log(singleNonDuplicate(arr));
+  
