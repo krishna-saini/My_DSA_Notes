@@ -1,6 +1,10 @@
-var findMedianSortedArrays = function (nums1, nums2) {
+// see actual problem in binary search folder for more context
+// this is just revision
+const findMedianSortedArrays = function (nums1, nums2) {
     let n1 = nums1.length;
     let n2 = nums2.length;
+    // as want to do binary search on smaller array to have some optimisation
+    // hence swapping them if required
     if (n1 > n2) {
       return findMedianSortedArrays(nums2, nums1);
     }
@@ -14,7 +18,7 @@ var findMedianSortedArrays = function (nums1, nums2) {
     while (left <= right) {
       const mid1 = left + Math.floor((right - left) / 2);
       const mid2 = halfLength - mid1;
-      console.log("krishna", nums1[mid1 - 1]);
+
       const l1 = mid1 > 0 ? nums1[mid1 - 1] : -Infinity;
       const l2 = mid2 > 0 ? nums2[mid2 - 1] : -Infinity;
       const r1 = mid1 < n1 ? nums1[mid1] : Infinity;
@@ -39,3 +43,6 @@ var findMedianSortedArrays = function (nums1, nums2) {
     }
   };
   
+
+  // TC - O(n+m)
+  // SC  O(1)
