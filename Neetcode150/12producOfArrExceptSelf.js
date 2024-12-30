@@ -60,8 +60,54 @@ const productExceptSelf1 = function (nums) {
 // Time Complexity: O(n) - two passes through the array
 // Space Complexity: O(1) additional space (not counting the result array)
 
-// Approach 3: Using Prefix and Suffix Products
+
+// Approach 3- > find prefix and suffix arr to  find it
 const productExceptSelf3 = function (nums) {
+    if (nums.length <= 1) {
+      return nums;
+    }
+    // outer loop(i from 0 to n)
+    const result = new Array(nums.length).fill(1); // SC - O(1)
+  
+    // if we dont have to use division
+    // then lets first find prefix product for each index
+    // then find suffix product for each index
+    // multiple prefix and suffix product for each index to get desired result
+  
+    // eg [ 2,3,4,2]
+    // prefixproduct = [1,2,6,24]
+    // suffixproduct = [24,8,2,1]
+    // final ans = [24,16,12,24]
+  
+    let prefixProductArr = [1];
+    for (let i = 1; i < nums.length; i++) {
+      // update each index with  product of all indices before them
+      //   console.log(nums[i-1], prefixProductArr)
+  
+      prefixProductArr[i] =
+        nums[i - 1] * prefixProductArr[prefixProductArr.length - 1];
+    }
+    //   console.log(prefixProductArr)
+  
+    let suffixProductArr = [1];
+    const reverseNums = nums.reverse();
+    for (let i = 1; i < reverseNums.length; i++) {
+      suffixProductArr[i] =
+        reverseNums[i - 1] * suffixProductArr[suffixProductArr.length - 1];
+    }
+    // console.log(suffixProductArr)
+    const reverse = suffixProductArr.reverse();
+    for (let i = 0; i < suffixProductArr.length; i++) {
+      result[i] = reverse[i] * prefixProductArr[i];
+    }
+  
+    return result;
+  };
+  
+
+// Approach 3: Using Prefix and Suffix Products - Optimised 
+// we dont need seperate array for each of the prefix and suffix 
+const productExceptSelf4 = function (nums) {
     if (nums.length <= 1) {
         return nums;
     }
