@@ -38,3 +38,61 @@ var topKFrequent = function (nums, k) {
   
 
 // TODO: optimise its TC
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function(nums, k) {
+  const freqMap = new Map();
+  const bucket = new Array(nums.length + 1); // +1 because frequency can be from 0 to nums.length
+  const result = [];
+
+  // nums [1,1,1,1, 2,2,3, 4, 5,5], k = 2
+  // Build frequency map
+  for (let num of nums) { // O(n)
+      freqMap.set(num, (freqMap.get(num) || 0) + 1); // O(1)
+  }
+
+  // freqMap - {1:4, 2:2, 3:1, 4:1, 5:2}
+  // we still want an order in it, one way is sorting which is O(nlogn)
+  // else if somehow we can map this frequMap to an array
+  // where the value will be indices of that arr and keys will be array num
+  for (const [num, freq] of freqMap) { // O(n) in worst case
+      if (!bucket[freq]) {
+          bucket[freq] = [];
+      }
+      bucket[freq].push(num); // O(1)
+  }
+
+  // bucket = [_, [3,4], [2,5],_, [1]]
+  //so now we have to fetch top K elements out of this bucket
+  for (let i = bucket.length - 1; i >= 0; i--) { // O(n) in worst case
+      if (bucket[i]) {
+          result.push(...bucket[i]); // O(1) amortized
+          if (result.length >= k) {
+              // slice it too as we may end up more elements in result while pushing
+              return result.slice(0, k); // O(k)
+          }
+      }
+  }
+
+  return result; // In case k is larger than the number of unique elements
+};
+
+/**
+* Time Complexity: O(n)
+* - Building frequency map: O(n)
+* - Populating bucket: O(n) in worst case (when all elements are unique)
+* - Collecting results: O(n) in worst case + O(k) for slicing
+* Overall, it's linear time as we go through the array at most a constant number of times.
+*
+* Space Complexity: O(n)
+* - freqMap: O(n) in worst case (when all elements are unique)
+* - bucket: O(n) as its length is at most nums.length + 1
+* - result: O(k) which is bounded by O(n)
+* 
+* Note: This algorithm is particularly efficient for large datasets with many duplicates,
+* as it avoids the need for sorting (which would be O(n log n)).
+*/
