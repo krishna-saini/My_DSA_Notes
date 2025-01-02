@@ -37,7 +37,7 @@ Explanation: s2 contains one permutation of s1 ("ba")
  * @param {string} s2
  * @return {boolean}
  */
-var checkInclusion = function (s1, s2) {
+const checkInclusion = function (s1, s2) {
     if (s1.length > s2.length) return false;
     const myMap = new Map();
   
@@ -82,9 +82,9 @@ var checkInclusion = function (s1, s2) {
       }
     }
     return false;
-  };
-  // TC O(n^2) SC O(n)
-  // console.log(checkInclusion("ab", "bba"));
+};
+// TC O(n^2) SC O(n)
+// console.log(checkInclusion("ab", "bba"));
   
   /**
   * Optimisation- 
@@ -96,7 +96,7 @@ var checkInclusion = function (s1, s2) {
   */
   
   //My approach with TC - O(n*k) where n,k are lenght of s1 & s2
-  const checkInclusion = function (s1, s2) {
+const checkInclusion2 = function (s1, s2) {
     if (s1.length > s2.length) return false;
   
     const s1Map = new Map();
@@ -145,6 +145,86 @@ var checkInclusion = function (s1, s2) {
 // TC - O(26*n)
 
 /**
+ * OPTIMISATION
+ * here we are comparing maps to each other in each iternation
+ * This can be avoided if we keep only one map of s1 and a variable matcheCount/requiredLength
+ * and while doing sliding window on s2, we keep on checking if end char of s2 lies on this map or not
+ * if lies, then reduce the count. if count become 0 for that char, it means it is fully matched. so increase the matchesCount variable
+ * 
+ * once window size hits, check is start char of s2 lies in map or not
+ * if lies, then increase the count. if count becomes 0, it meanas it was fully matched earlier, hence we should decreae the matchesCount variable
+ * 
+ */
+const checkInclusion3 = function (s1, s2) {
+    // If s1 is larger than s2, it cannot be a substring
+    if (s1.length > s2.length) return false;
+
+    // Create a frequency map to store the character counts of s1
+    const freqMap = new Map();
+
+    // Initialize the match count to track matching characters
+    let matchCount = 0;
+
+    // Populate the frequency map with characters from s1
+    for (let char of s1) {
+        freqMap.set(char, (freqMap.get(char) || 0) + 1);
+    }
+
+    // Calculate the total number of unique characters to match
+    const requiredMatches = freqMap.size;
+
+    // Initialize the start pointer for the sliding window
+    let start = 0;
+
+    // Iterate over each character in s2 using the end pointer
+    for (let end = 0; end < s2.length; end++) {
+        // Get the character currently entering the sliding window
+        const charIn = s2[end];
+
+        // If the character exists in the frequency map
+        if (freqMap.has(charIn)) {
+            // Decrease its frequency in the map
+            freqMap.set(charIn, freqMap.get(charIn) - 1);
+
+            // If the frequency becomes zero, one unique character is fully matched
+            if (freqMap.get(charIn) === 0) {
+                matchCount++;
+            }
+        }
+
+        // If the window size exceeds the size of s1, shrink the window
+        if (end - start + 1 > s1.length) {
+            // Get the character currently leaving the sliding window
+            const charOut = s2[start];
+
+            // If the character exists in the frequency map
+            if (freqMap.has(charOut)) {
+                // If the frequency is zero before removing, it means this was fully matched earlier,  decrement match count
+                if (freqMap.get(charOut) === 0) {
+                    matchCount--;
+                }
+
+                // Restore its frequency in the map
+                freqMap.set(charOut, freqMap.get(charOut) + 1);
+            }
+
+            // Move the start pointer to shrink the window
+            start++;
+        }
+
+        // If all unique characters are matched, we found a permutation
+        if (matchCount === requiredMatches) {
+            return true;
+        }
+    }
+
+    // If no permutation was found, return false
+    return false;
+};
+
+
+
+/**
  * More optimisation-
  * Since we are dealing with strings - s1 and s2 consist of lowercase English letters
  * hence it is sure that there can be max 26 type of char 
@@ -155,4 +235,66 @@ var checkInclusion = function (s1, s2) {
  Slide the window across s2 by one character at a time, updating the window's frequency counts.
 Compare the frequency arrays after each slide. If they match, it means a permutation of s1 is found in s2
 */
-  
+
+const checkInclusion4 = function(s1, s2) {
+    // If s1 is larger than s2, it cannot be a substring
+    if (s1.length > s2.length) return false;
+
+    // Create frequency arrays to store character counts for s1 and the current window in s2
+    const s1Map = new Array(26).fill(0); // Frequency of characters in s1
+    const s2Map = new Array(26).fill(0); // Frequency of characters in the sliding window of s2
+
+    // Populate s1Map and the initial window of s2Map
+    for (let i = 0; i < s1.length; i++) {
+        s1Map[s1.charCodeAt(i) - 97]++; // Increment count for s1 characters
+        s2Map[s2.charCodeAt(i) - 97]++; // Increment count for initial window in s2
+    }
+
+    // Initialize the number of matches between s1Map and s2Map
+    let matches = 0;
+
+    // Count initial matches for each of the 26 characters
+    for (let i = 0; i < 26; i++) { // O(1)
+        if (s1Map[i] === s2Map[i]) matches++;
+    }
+
+    // Use a sliding window approach, starting from the first character in s2
+    let left = 0;
+
+    // Iterate over the rest of the characters in s2
+    for (let right = s1.length; right < s2.length; right++) { // O(n - k)
+        // If all 26 characters match, a permutation of s1 is found
+        if (matches === 26) return true;
+
+        // Add the new character (at the `right` pointer) to the window
+        let index = s2.charCodeAt(right) - 97;
+        s2Map[index]++; // Increment its frequency in s2Map
+
+        // Update matches based on the new character
+        if (s2Map[index] === s1Map[index]) {
+            matches++; // Match increased
+        } else if (s2Map[index] === s1Map[index] + 1) {
+            matches--; // Match decreased as it exceeded the required count
+        }
+
+        // Remove the old character (at the `left` pointer) from the window
+        index = s2.charCodeAt(left) - 97;
+        s2Map[index]--; // Decrement its frequency in s2Map
+
+        // Update matches based on the removed character
+        if (s2Map[index] === s1Map[index]) {
+            matches++; // Match increased
+        } else if (s2Map[index] === s1Map[index] - 1) {
+            matches--; // Match decreased as it fell below the required count
+        }
+
+        // Move the left pointer to shrink the window
+        left++;
+    }
+
+    // Check one last time if all 26 characters match
+    return matches === 26;
+};
+
+// SC - O(26+26)=O(52), TC - O(n)
+//more efficient than using hashmap
