@@ -28,6 +28,7 @@ function majorityElement(arr) {
   let el; // Element
 
   // Applying the algorithm
+  // Candidate Selection: Identify a potential candidate for the majority element
   for (let i = 0; i < n; i++) {
     if (cnt === 0) {
       cnt = 1;
@@ -38,6 +39,13 @@ function majorityElement(arr) {
       cnt--;
     }
   }
+  /**
+   * Why this works: The counter tracks a "vote balance." 
+   * If an element is the majority, it will have more votes than the others combined, 
+   * so it will remain the candidate at the end.
+   */
+
+  // Candidate Validation: Verify if the candidate is indeed the majority element.
 
   // Checking if the stored element is the majority element
   // we dont need this loop if questions says that there will be a majority element

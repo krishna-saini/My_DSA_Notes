@@ -93,23 +93,30 @@ The key insight of Kadane's algorithm is to iterate through the array while keep
 The maximum sum of any subarray ending at the current position.
 The maximum sum encountered so far.
 */
-
 const maxSubArrSum = (nums) => {
-  let maxSubArrSum = -Infinity;
-  let maxPrefixSum = 0;
+  // Edge case: empty array
+  if (nums.length === 0) return -1; // Confirm behavior with the interviewer.
 
-  if (nums.length === 0) return -1; // check with interviewer about this
+  let maxSubArrSum = -Infinity; // Store the maximum sum encountered so far
+  let maxPrefixSum = 0;         // Store the maximum sum of subarrays ending at the current position
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     // The maximum sum of any subarray ending at the current position.
-    maxPrefixSum = Math.max(arr[i], maxPrefixSum + arr[i]);
+    // maxPrefixSum = Math.max(arr[i], maxPrefixSum + arr[i]);
+    if (maxPrefixSum + nums[i] > nums[i]) {
+      maxPrefixSum = maxPrefixSum + nums[i];
+    } else {
+      maxPrefixSum = nums[i];
+    }
 
     //The maximum sum encountered so far.
-    maxSubArrSum = Math.max(maxSubArrSum, maxPrefixSum);
-
-    // solution for 1st follow up
-    //if (maxSubArrSum < 0) maxSubArrSum = 0;
+    // maxSubArrSum = Math.max(maxSubArrSum, maxPrefixSum);
+    // Update the maxSubArrSum if the current maxPrefixSum is larger
+    if (maxPrefixSum > maxSubArrSum) {
+      maxSubArrSum = maxPrefixSum;
+    }
   }
+
   return maxSubArrSum;
 };
 
