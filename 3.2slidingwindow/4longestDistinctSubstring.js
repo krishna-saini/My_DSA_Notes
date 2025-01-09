@@ -1,6 +1,18 @@
 /**
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+ * 
  * @param {string} s
  * @return {number}
+ */
+
+/**
+ * Questions to ask
+ * 1. will there be lower case char only
+ * 2. can it have spaces or non alpha numeric char 
+ * 
+ * Brute force 
+ * 
+ * variable sliding window problem
  */
 const lengthOfLongestSubstring = function (str) {
     if (str.length === 1) {
@@ -71,14 +83,12 @@ const lengthOfLongestSubstring = function (str) {
  *      it means this character is repeated.
  * 
  * 3. **How do we handle a repeated character?**
- *    - **Question:** If a character is repeated, what happens to the current substring?
  *      - The substring becomes invalid because of the repetition. To fix this:
  *        - Move `start` to one position after the last occurrence of the repeated character.
  *    - **Why?**
  *      - This ensures the new substring starts just after the repeated character, eliminating the repetition.
  * 
- * 4. **Why do we use `Math.max` for `start`?**
- *    - **Question:** What if the repeated character occurred before the current `start`?
+ * 4. What if the repeated character occurred before the current `start`
  *      - If it occurred before, it’s no longer part of the substring, so `start` shouldn’t move backward.
  *      - Using `Math.max` ensures `start` only moves forward.
  * 
@@ -120,3 +130,80 @@ const lengthOfLongestSubstring_optimised = function(s) {
     // Return the length of the longest substring without repeating characters.
     return maxLen;
 };
+
+// TC - O(n), SC - O(k) where k is the size of the character set
+
+// follow up 1 -> can we optimsed space complexity
+const lengthOfLongestSubstring_optimised_more = function (s) {
+  let start = 0;
+  let maxLen = 0;
+  const arr = new Array(26).fill(0);
+
+  for (let i = 0; i < s.length; i++) {
+    const charCode = s.charCodeAt(i) - 97; // take care of capital letter/ non alphanumeric char 
+    
+    if (arr[charCode] >= 0) {
+      start = Math.max(arr[charCode], start);
+    }
+    
+    arr[charCode] = i + 1;
+    maxLen = Math.max(i - start + 1, maxLen);
+  }
+
+  return maxLen;
+};
+
+// TC O(n), SC O(1)
+/**
+ * Above approach has better SC but it will not handle Unicode characters and emojis correctly. Here's why:
+
+The array size is fixed at 26, assuming only lowercase English letters (a-z).
+Unicode characters and emojis have character codes well outside this range.
+The Map can handle any character as a key, making it suitable for Unicode and emoji handling.
+ */
+
+// followup question 2
+/**
+How would your approach change if the problem was to find the longest substring with exactly two distinct characters?
+Input: "eceba"
+Output: 3
+Explanation:
+The longest substring with exactly two distinct characters is "ece".
+Substrings with two distinct characters: "ec", "ece", "ce", "eb", "ba"
+
+solution - fixed sliding window problem
+ */
+const lengthOfLongestSubstringTwoDistinct = function (s) {
+  if (s.length < 2) return s.length;
+
+  let start = 0;
+  let maxLen = 0;
+  const charCount = new Map(); // Tracks the frequency of characters in the window
+
+  for (let end = 0; end < s.length; end++) {
+      // calculations
+      const char = s[end];
+      charCount.set(char, (charCount.get(char) || 0) + 1);
+
+      // maintain the window
+      while (charCount.size > 2) {
+          const startChar = s[start];
+          charCount.set(startChar, charCount.get(startChar) - 1);
+          if (charCount.get(startChar) === 0) {
+              charCount.delete(startChar); // Remove the character from the map
+          }
+          start++; // Shrink the window
+      }
+
+      // gets ans from the calculations
+      maxLen = Math.max(maxLen, end - start + 1);
+  }
+
+  return maxLen;
+};
+console.log(lengthOfLongestSubstringTwoDistinct("eceba")); // Output: 3
+console.log(lengthOfLongestSubstringTwoDistinct("ccaabbb")); // Output: 5
+console.log(lengthOfLongestSubstringTwoDistinct("ababffzzeee")); // Output: 5
+console.log(lengthOfLongestSubstringTwoDistinct("aaaa")); // Output: 4
+console.log(lengthOfLongestSubstringTwoDistinct("a")); // Output: 1
+
