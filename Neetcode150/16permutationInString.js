@@ -222,8 +222,6 @@ const checkInclusion3 = function (s1, s2) {
     return false;
 };
 
-
-
 /**
  * More optimisation-
  * Since we are dealing with strings - s1 and s2 consist of lowercase English letters
@@ -298,3 +296,52 @@ const checkInclusion4 = function(s1, s2) {
 
 // SC - O(26+26)=O(52), TC - O(n)
 //more efficient than using hashmap
+
+const checkInclusion5 = function(s1, s2) {
+  // If s1 is larger than s2, no permutation is possible
+  if (s1.length > s2.length) return false;
+
+  // Step 1: Initialize frequency map for `s1`
+  const charFrequency = Array(26).fill(0); // Array for 'a' to 'z' characters
+  for (let char of s1) {
+      charFrequency[char.charCodeAt(0) - 97]++; // Count frequencies of characters in `s1`
+  }
+
+  let matchCount = 0; // Tracks how many unique characters in `s1` are fully matched
+  const requiredMatches = charFrequency.filter(freq => freq > 0).length; // Total unique characters in `s1` to match
+
+  let start = 0; // Start pointer for sliding window
+
+  // Step 2: Iterate over `s2` with the sliding window
+  for (let end = 0; end < s2.length; end++) {
+      const indexIn = s2[end].charCodeAt(0) - 97; // Character entering the window
+      charFrequency[indexIn]--; // Decrease frequency for incoming character
+
+      // If a character's frequency becomes exactly 0, it means it's fully matched
+      if (charFrequency[indexIn] === 0) {
+          matchCount++;
+      }
+
+      // If all unique characters are matched, return true (found permutation)
+      if (matchCount === requiredMatches) {
+          return true;
+      }
+
+      // Step 3: Shrink the window when its size exceeds `s1.length`
+      if (end - start + 1 === s1.length) {
+          const indexOut = s2[start].charCodeAt(0) - 97; // Character leaving the window
+
+          // If the outgoing character was fully matched, decrement `matchCount`
+          if (charFrequency[indexOut] === 0) {
+              matchCount--;
+          }
+
+          // Restore the frequency of the outgoing character
+          charFrequency[indexOut]++;
+          start++; // Move the start pointer to shrink the window
+      }
+  }
+
+  // If no permutation is found, return false
+  return false;
+};
