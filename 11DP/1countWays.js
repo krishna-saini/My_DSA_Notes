@@ -7,7 +7,7 @@ function countWays(n, arr) {
   DP[0] = 1;
 
   // Iterate for all values from 1 to n
-  for (var i = 1; i <= n; i++) {
+  for (let i = 1; i <= n; i++) {
     for (let j = 0; j < arr.length; j++) {
       if (i >= arr[j]) {
         DP[i] += DP[i - arr[j]];
