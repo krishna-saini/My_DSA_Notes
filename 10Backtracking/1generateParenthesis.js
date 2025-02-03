@@ -30,3 +30,34 @@ const generateParenthesis = function (n) {
     backTracking("", 0, 0);
     return result;
 };
+
+// using stack
+function generateParentheses(n) {
+    const result = [];
+    const stack = [{ current: "", open: 0, close: 0 }];
+
+    while (stack.length > 0) {
+        const { current, open, close } = stack.pop();
+
+        // If the current combination is valid, store it
+        if (current.length === 2 * n) {
+            result.push(current);
+            continue;
+        }
+
+        // Add opening bracket if possible
+        if (open < n) {
+            stack.push({ current: current + "(", open: open + 1, close });
+        }
+
+        // Add closing bracket if possible
+        if (close < open) {
+            stack.push({ current: current + ")", open, close: close + 1 });
+        }
+    }
+
+    return result;
+}
+
+console.log(generateParentheses(3));
+// above is ver slow due to overhead of creating object every tim
