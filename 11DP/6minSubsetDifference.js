@@ -133,18 +133,16 @@ class Solution {
 
         return totalSum - 2 * closestSum;
     }
+    // Tabular approach
     subsetSumToKUsingTabular(arr, k){
-        
-        for(let index=0; index<arr.length;index++){
-            this.memo[index][0] = true;
-        }
+            this.memo[0][0] = true;
         
         if(arr[0] <= k){
             this.memo[0][arr[0]] = true;
         }
         
         for (let index = 1; index < arr.length; index++) {
-        for (let target = 1; target <= k; target++) {
+        for (let target = 0; target <= k; target++) {
             // Path 1: Exclude the current element (take the value from the previous row)
             const excludeCurrent = this.memo[index - 1][target];
 
@@ -197,6 +195,7 @@ class Solution {
   
       return totalSum - 2 * closestSum;
     }
+    // using 1D array for DP
     subsetSumToKUsingTabular(k, arr) {
       this.memo[0] = true; // 0 sum is always there
       // If the first element is less than or equal to the target, set dp[arr[0]] to true
@@ -206,7 +205,7 @@ class Solution {
   
       for (let index = 1; index < arr.length; index++) {
         // travese the target in reversse order to prevent overwriting
-        for (let target = k; target >= 0; target--) {
+        for (let target = k; target >= arr[index]; target--) {
           // exclude || include
           this.memo[target] = this.memo[target] || this.memo[target - arr[index]];
         }

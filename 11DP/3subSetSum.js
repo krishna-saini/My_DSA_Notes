@@ -117,19 +117,21 @@ export function subsetSumToKUsingTabulation(n, k, arr) {
 
     // Base case: If the target sum is 0, an empty subset is always a valid solution
     // So, fill the first column (target sum 0) with true
-    for (let index = 0; index < n; index++) {
-        dp[index][0] = true;
-    }
+    // for (let index = 0; index < n; index++) {
+    //     dp[index][0] = true;
+    // }
+    dp[0][0] = true; // doing it for 0th index only as other index are anyway overwritten while filling DP table
 
     // Base case: For the first element, if the element is equal to the target, it's a valid solution
+    // this is required if you are doing n rows.
     if (arr[0] <= k) {
-        dp[0][arr[0]] = true;
+        dp[0][arr[0]] = true;  
     }
 
     // Fill the DP table
     // dp[i][j] will be true if we can make sum j using the first i elements of the array
     for (let index = 1; index < n; index++) {
-        for (let target = 1; target <= k; target++) {
+        for (let target = 0; target <= k; target++) { // can start from 1st column also here as the values are T/F only
             // Path 1: Exclude the current element (take the value from the previous row)
             const excludeCurrent = dp[index - 1][target];
 
@@ -182,5 +184,5 @@ export function subsetSumToKUsing1DArr(n, k, arr) {
     return dp[k];
 }
 
-// TC - same
+// TC - O(n*target)
 // SC - O(target)

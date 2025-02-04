@@ -5,38 +5,6 @@
  1. the problem is similar to subSetSum problem itself.
  2. here we need to count number of subsets too, hence we need to initialize the dp table with 0
  */
-function perfectSum(arr, target) {
-    const n = arr.length;
-
-    // Create a DP table to store the count of subsets
-    const dp = new Array(n).fill(0).map(() => new Array(target + 1).fill(0));
-
-    // Base case: There's 1 subset (empty) that makes the target 0
-    for (let i = 0; i < n; i++) {
-        dp[i][0] = 1;
-    }
-  
-    if(arr[0] <= target) {
-        dp[0][arr[0]] = 1;
-    }
-
-    // Fill the DP table
-    for (let i = 1; i < n; i++) {
-        for (let t = 1; t <= target; t++) {
-            const exclude = dp[i - 1][t];
-            const include = arr[i] <= t ? dp[i - 1][t - arr[i]] : 0; 
-            dp[i][t] = exclude + include;
-        }
-    }
-
-    return dp[n - 1][target];
-}
-
-const arr = [1, 2, 3, 3];
-const target = 6;
-console.log("Count of subsets with sum", target, ":", perfectSum(arr, target));
-
-
 // above solution using memo
 // A JavaScript program to count the number of subsets with
 // a sum equal to a target using recursion and memoization
@@ -78,6 +46,43 @@ function perfectSum2(arr, target) {
 // Test Example
 console.log(`Count of subsets with sum ${target}:`, perfectSum2([1, 2, 3, 3], 6));
 
+
+// using tabulation 
+function findSubsetCountWithSumK(nums, target) {
+    const n = nums.length;
+
+    // Create a DP table where dp[i][t] represents the number of ways
+    // to get a subset sum of `t` using the first `i` elements.
+    const dp = new Array(n).fill(0).map(() => new Array(target + 1).fill(0));
+
+    // Base case: There's 1 way to achieve sum 0 (by selecting no elements)
+    dp[0][0] = 1;
+
+    // Handle the first element explicitly if it's within the target range
+    if (nums[0] <= target) {
+        dp[0][nums[0]] += 1;
+    }
+
+    // Fill the DP table iteratively
+    for (let i = 1; i < n; i++) {
+        for (let t = 0; t <= target; t++) {
+            // Exclude the current element: take the previous result for this target sum
+            const exclude = dp[i - 1][t];
+
+            // Include the current element if it doesn't exceed the target
+            const include = nums[i] <= t ? dp[i - 1][t - nums[i]] : 0;
+
+            // Total count is the sum of both cases
+            dp[i][t] = exclude + include;
+        }
+    }
+
+    // The final result is stored in dp[n - 1][target]
+    return dp[n - 1][target];
+}
+
+// Example usage
+console.log("Count of subsets with sum", target, ":", findSubsetCountWithSumK([0,0,1], 1)); // 4
 
 // solve it using single 1D arr
 // since we are only interested in last row of dp table, 
