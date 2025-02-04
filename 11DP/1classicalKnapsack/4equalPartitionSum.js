@@ -5,7 +5,7 @@
  */
 
 // using recursion
-var canPartition = function (nums) {
+const canPartition = function (nums) {
     // this problem is very much related to findArrSubsetSumK problem
     // https://leetcode.com/discuss/interview-question/1279773/google-interview-question-array-subset-sum-equals-k
 
@@ -55,7 +55,7 @@ var canPartition = function (nums) {
  * @param {number[]} nums
  * @return {boolean}
  */
-const canPartition = function (nums) {
+const canPartition2 = function (nums) {
     const totalSum = nums.reduce((acc, current) => acc + current, 0);
 
     // If total sum is odd, partitioning is impossible
@@ -65,9 +65,10 @@ const canPartition = function (nums) {
     const memo = new Array(nums.length ).fill(null).map(() => new Array(target + 1).fill(false));
 
     // Initialize the first column to true (target 0 is always achievable)
-    for (let index = 0; index < nums.length; index++) {
-        memo[index][0] = true;
-    }
+    // for (let index = 0; index < nums.length; index++) {
+    //     memo[index][0] = true;
+    // }
+    memo[0][0] = true; 
 
     // Initialize the first row
     if (nums[0] <= target) {
@@ -76,7 +77,7 @@ const canPartition = function (nums) {
 
     // Fill the DP table
     for (let index = 1; index < nums.length; index++) {
-        for (let cols = 1; cols <= target; cols++) {
+        for (let cols = 0; cols <= target; cols++) {
             const excludeCurrent = memo[index - 1][cols];
             const includeCurrent = nums[index] > cols ? false : memo[index - 1][cols - nums[index]];
             memo[index][cols] = excludeCurrent || includeCurrent;
@@ -98,7 +99,7 @@ const canPartition = function (nums) {
  * @param {number[]} nums - Array of integers.
  * @return {boolean} - True if partition is possible, false otherwise.
  */
-var canPartition = function (nums) {
+const canPartition3 = function (nums) {
     // Calculate the total sum of all elements in the array
     const totalSum = nums.reduce((acc, num) => acc + num, 0);
 
