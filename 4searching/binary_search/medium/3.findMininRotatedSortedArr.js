@@ -107,6 +107,7 @@ const findMin = function (arr) {
       // Check if mid is the minimum element
       // In a rotated sorted array, the smallest element (pivot) satisfies the condition:
       // arr[mid] < arr[mid - 1]
+      // add a check here to check if arr[mid-1] even exists
       if (arr[mid] < arr[mid - 1]) {
         return arr[mid];
       }

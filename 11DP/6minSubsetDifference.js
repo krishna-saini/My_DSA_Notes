@@ -1,8 +1,6 @@
 // https://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum/
 // https://www.geeksforgeeks.org/problems/minimum-sum-partition3317/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
-import { subsetSumToKUsingTabulation } from "./3subSetSum";
-
 /**
  * Given an array arr[]  containing non-negative integers, the task is to divide it into two sets set1 and set2 such that 
  * the absolute difference between their sums is minimum and find the minimum difference.
@@ -221,3 +219,4 @@ class Solution {
   
   
 // the above problem can also be solved by finding table for the whole sum line and then divide it at the end
+// this makes this problem to find subsetSum table for the array sum + some lines to find max from the half of last row of table

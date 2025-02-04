@@ -34,6 +34,7 @@ var canPartition = function (nums) {
     const recursion = (index, target) => {
         if (target === 0) return true;  // Base case: subset found
         if (index < 0) return false;    // Base case: no elements left
+        //  if (index === 0) return nums[0]===target;
 
         // dont use  !memo[index][target] as it checks if the value is falsy which can be 0, "" too
         if (memo[index][target] !== undefined) return memo[index][target];
@@ -45,7 +46,7 @@ var canPartition = function (nums) {
         return memo[index][target] = currentIndexNotTaken || currentIndexTaken;
     };
 
-    return recursion(nums.length - 1, target);
+    return recursion(nums.length - 1, target);  
 };
 
 // using 2D table
@@ -54,14 +55,14 @@ var canPartition = function (nums) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function (nums) {
+const canPartition = function (nums) {
     const totalSum = nums.reduce((acc, current) => acc + current, 0);
 
     // If total sum is odd, partitioning is impossible
     if (totalSum % 2 !== 0) return false;
 
     const target = totalSum / 2;
-    const memo = new Array(nums.length).fill(null).map(() => new Array(target + 1).fill(false));
+    const memo = new Array(nums.length ).fill(null).map(() => new Array(target + 1).fill(false));
 
     // Initialize the first column to true (target 0 is always achievable)
     for (let index = 0; index < nums.length; index++) {
@@ -132,4 +133,7 @@ var canPartition = function (nums) {
 
 // Time complexity: O(n * target) where n is the number of elements and target is the sum we are trying to reach.
 // Space complexity: O(target) due to the DP array used to store the possible sums.
+
+
+// followup - solve it using O(n) TC and O(1) SC using bit maninpulation
 

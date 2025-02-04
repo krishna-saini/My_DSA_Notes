@@ -1,5 +1,5 @@
 /**
- * Longest Subarray with given Sum K(Positives)
+ * Longest Subarray(consecutive) with given Sum K(Positives)
   Problem Statement: Given an array and a sum k,
  we need to print the length of the longest subarray that sums to k.
  */
@@ -72,3 +72,6 @@ console.log(longestSubArrOfGivenSumOptimal([1, 2, 3, 4, 2, -1, 1], 6));
 // but two pointer wont work for array with negetive numbers as 
 // the sum of array may become always < k due to negetive numbers.
 // try dry running two pointer on [-1,-1,10] & k=0;
+
+// followup - print that subarray that has sum = k
+// once you know start and last index, we can easily print it

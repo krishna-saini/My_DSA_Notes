@@ -94,13 +94,13 @@ const countSubsetSumUsing1DMemo = (arr, target) => {
     // fill the dp array
     for (let index = 1; index < arr.length; index++) {
       // reverse traverse the dp row to prevent overwriting
-      for (let t = target; t > 0; t--) {
+      for (let t = target; t >= arr[index]; t--) {
         dp[t] = dp[t] + dp[t - arr[index]];
       }
     }
     //
     return dp[target];
-  };
+};
   
-  console.log(countSubsetSumUsing1DMemo([1, 2, 3, 3], 6)); // 3
+console.log(countSubsetSumUsing1DMemo([1, 2, 3, 3], 6)); // 3
   
