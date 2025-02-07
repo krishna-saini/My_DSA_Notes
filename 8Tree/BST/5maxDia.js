@@ -19,3 +19,9 @@ const diameterOfBinaryTree = function(root) {
     getHeight(root); // Kick off traversal
     return maxDia;
 };
+
+/**
+ * Time Complexity: O(n) — Visits each node once.
+ * Space Complexity: O(h) — Call stack size for recursion, where h is the height of the tree.
+ */
+
